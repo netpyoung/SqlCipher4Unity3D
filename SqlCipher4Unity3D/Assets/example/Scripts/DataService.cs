@@ -13,7 +13,7 @@ public class DataService  {
 	public DataService(string DatabaseName){
 
 #if UNITY_EDITOR
-            var dbPath = string.Format(@"Assets/example/StreamingAssets/{0}", DatabaseName);
+            var dbPath = string.Format(@"Assets/StreamingAssets/{0}", DatabaseName);
 #else
         // check if file exists in Application.persistentDataPath
         var filepath = string.Format("{0}/{1}", Application.persistentDataPath, DatabaseName);
