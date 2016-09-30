@@ -60,8 +60,8 @@ namespace SqlCipher4Unity3D {
 		/// only here for backwards compatibility. There is a *significant* speed advantage, with no
 		/// down sides, when setting storeDateTimeAsTicks = true.
 		/// </param>
-		public SQLiteConnection (string databasePath, bool storeDateTimeAsTicks = false)
-			: this (databasePath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create, storeDateTimeAsTicks)
+		public SQLiteConnection (string databasePath, string password, bool storeDateTimeAsTicks = false)
+			: this (databasePath, password, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create, storeDateTimeAsTicks)
 		{
 		}
 
@@ -77,7 +77,7 @@ namespace SqlCipher4Unity3D {
 		/// only here for backwards compatibility. There is a *significant* speed advantage, with no
 		/// down sides, when setting storeDateTimeAsTicks = true.
 		/// </param>
-		public SQLiteConnection (string databasePath, SQLiteOpenFlags openFlags, bool storeDateTimeAsTicks = false) {
+		public SQLiteConnection (string databasePath, string password, SQLiteOpenFlags openFlags, bool storeDateTimeAsTicks = false) {
 			if (string.IsNullOrEmpty (databasePath))
 				throw new ArgumentException ("Must be specified", "databasePath");
 
@@ -97,14 +97,20 @@ namespace SqlCipher4Unity3D {
 			// force open to using UTF-8 using sqlite3_open_v2
 			var databasePathAsBytes = GetNullTerminatedUtf8 (DatabasePath);
 			var r = SQLite3.Open (databasePathAsBytes, out handle, (int) openFlags, IntPtr.Zero);
-
-			//SQLite3.sqlite3_key(handle, "pwd", 3);
 			#endif
 
 			Handle = handle;
 			if (r != SQLite3.Result.OK) {
 				throw SQLiteException.New (r, String.Format ("Could not open database file: {0} ({1})", DatabasePath, r));
 			}
+
+			if (password != null) {
+				var result = SQLite3.Key(handle, password, password.Length);
+				if (result != SQLite3.Result.OK) {
+					throw SQLiteException.New (r, String.Format ("Could not open database file: {0} ({1})", DatabasePath, r));
+				}
+			}
+
 			_open = true;
 
 			StoreDateTimeAsTicks = storeDateTimeAsTicks;
@@ -1420,13 +1426,9 @@ namespace SqlCipher4Unity3D {
 
 	public class TableMapping {
 		public Type MappedType { get; private set; }
-
 		public string TableName { get; private set; }
-
 		public Column[] Columns { get; private set; }
-
 		public Column PK { get; private set; }
-
 		public string GetByPrimaryKeySql { get; private set; }
 
 		Column _autoPk;

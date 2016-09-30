@@ -171,7 +171,7 @@ namespace SqlCipher4Unity3D
 		public static extern Result Open(byte[] filename, out IntPtr db, int flags, IntPtr zvfs);
 
 		[DllImport(DLL_NAME, EntryPoint = "sqlite3_key", CallingConvention = CallingConvention.Cdecl)]
-		public static extern Result sqlite3_key(IntPtr db, [MarshalAs(UnmanagedType.LPStr)]string key, int keylen);
+		public static extern Result Key(IntPtr db, [MarshalAs(UnmanagedType.LPStr)]string key, int keylen);
 
 		[DllImport(DLL_NAME, EntryPoint = "sqlite3_open16", CallingConvention = CallingConvention.Cdecl)]
 		public static extern Result Open16([MarshalAs(UnmanagedType.LPWStr)] string filename, out IntPtr db);

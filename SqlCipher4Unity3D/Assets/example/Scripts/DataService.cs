@@ -54,9 +54,8 @@ public class DataService  {
 
         var dbPath = filepath;
 #endif
-            _connection = new SQLiteConnection(dbPath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create);
+		_connection = new SQLiteConnection(dbPath, "password");
         Debug.Log("Final PATH: " + dbPath);     
-
 	}
 
 	public void CreateDB(){
