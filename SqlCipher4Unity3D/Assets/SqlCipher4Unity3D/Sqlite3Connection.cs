@@ -2114,14 +2114,17 @@ namespace SqlCipher4Unity3D {
 				int rowsAffected = SQLite3.Changes (Connection.Handle);
 				SQLite3.Reset (Statement);
 				return rowsAffected;
-			} else if (r == SQLite3.Result.Error) {
+			}
+			else if (r == SQLite3.Result.Error) {
 				string msg = SQLite3.GetErrmsg (Connection.Handle);
 				SQLite3.Reset (Statement);
 				throw SQLiteException.New (r, msg);
-			} else if (r == SQLite3.Result.Constraint && SQLite3.ExtendedErrCode (Connection.Handle) == SQLite3.ExtendedResult.ConstraintNotNull) {
+			}
+			else if (r == SQLite3.Result.Constraint && SQLite3.ExtendedErrCode (Connection.Handle) == SQLite3.ExtendedResult.ConstraintNotNull) {
 				SQLite3.Reset (Statement);
 				throw NotNullConstraintViolationException.New (r, SQLite3.GetErrmsg (Connection.Handle));
-			} else {
+			}
+			else {
 				SQLite3.Reset (Statement);
 				throw SQLiteException.New (r, r.ToString ());
 			}
@@ -2142,7 +2145,8 @@ namespace SqlCipher4Unity3D {
 			if (Statement != NullStatement) {
 				try {
 					SQLite3.Finalize (Statement);
-				} finally {
+				}
+				finally {
 					Statement = NullStatement;
 					Connection = null;
 				}

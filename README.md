@@ -75,3 +75,7 @@ All of the deliverable code in SQLite has been written from scratch. No code has
             (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
             SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ~~~
+
+## TODO
+* refactoring
+* SafeHandle
