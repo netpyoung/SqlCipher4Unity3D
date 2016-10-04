@@ -1236,28 +1236,24 @@ namespace SqlCipher4Unity3D {
 		/// <returns>
 		/// The number of rows updated.
 		/// </returns>
-		public int Update (object obj, Type objType)
-		{
+		public int Update (object obj, Type objType) {
 			int rowsAffected = 0;
 			if (obj == null || objType == null) {
 				return 0;
 			}
 
 			var map = GetMapping (objType);
-
 			var pk = map.PK;
 
 			if (pk == null) {
 				throw new NotSupportedException ("Cannot update " + map.TableName + ": it has no PK");
 			}
 
-			var cols = from p in map.Columns
-					where p != pk
-				select p;
-			var vals = from c in cols
-				select c.GetValue (obj);
+			var cols = from p in map.Columns where p != pk select p;
+			var vals = from c in cols select c.GetValue (obj);
 			var ps = new List<object> (vals);
 			ps.Add (pk.GetValue (obj));
+
 			var q = string.Format ("update \"{0}\" set {1} where {2} = ? ", map.TableName, string.Join (",", (from c in cols
 				select "\"" + c.Name + "\" = ? ").ToArray ()), pk.Name);
 
@@ -1285,8 +1281,7 @@ namespace SqlCipher4Unity3D {
 		/// <returns>
 		/// The number of rows modified.
 		/// </returns>
-		public int UpdateAll (System.Collections.IEnumerable objects)
-		{
+		public int UpdateAll (System.Collections.IEnumerable objects) {
 			var c = 0;
 			RunInTransaction (() => {
 				foreach (var r in objects) {
@@ -2178,6 +2173,7 @@ namespace SqlCipher4Unity3D {
 		List<Ordering> _orderBys;
 		int? _limit;
 		int? _offset;
+		bool _deferred;
 
 		BaseTableQuery _joinInner;
 		Expression _joinInnerKeySelector;
@@ -2187,20 +2183,22 @@ namespace SqlCipher4Unity3D {
 
 		Expression _selector;
 
-		TableQuery (SQLiteConnection conn, TableMapping table)
-		{
+		class CompileResult {
+			public string CommandText { get; set; }
+			public object Value { get; set; }
+		}
+
+		TableQuery (SQLiteConnection conn, TableMapping table) {
 			Connection = conn;
 			Table = table;
 		}
 
-		public TableQuery (SQLiteConnection conn)
-		{
+		public TableQuery (SQLiteConnection conn) {
 			Connection = conn;
 			Table = Connection.GetMapping (typeof(T));
 		}
 
-		public TableQuery<U> Clone<U> ()
-		{
+		public TableQuery<U> Clone<U> () {
 			var q = new TableQuery<U> (Connection, Table);
 			q._where = _where;
 			q._deferred = _deferred;
@@ -2218,68 +2216,58 @@ namespace SqlCipher4Unity3D {
 			return q;
 		}
 
-		public TableQuery<T> Where (Expression<Func<T, bool>> predExpr)
-		{
+		public TableQuery<T> Where (Expression<Func<T, bool>> predExpr) {
 			if (predExpr.NodeType == ExpressionType.Lambda) {
 				var lambda = (LambdaExpression)predExpr;
 				var pred = lambda.Body;
 				var q = Clone<T> ();
 				q.AddWhere (pred);
 				return q;
-			} else {
+			}
+			else {
 				throw new NotSupportedException ("Must be a predicate");
 			}
 		}
 
-		public TableQuery<T> Take (int n)
-		{
+		public TableQuery<T> Take (int n) {
 			var q = Clone<T> ();
 			q._limit = n;
 			return q;
 		}
 
-		public TableQuery<T> Skip (int n)
-		{
+		public TableQuery<T> Skip (int n) {
 			var q = Clone<T> ();
 			q._offset = n;
 			return q;
 		}
 
-		public T ElementAt (int index)
-		{
+		public T ElementAt (int index) {
 			return Skip (index).Take (1).First ();
 		}
 
-		bool _deferred;
-		public TableQuery<T> Deferred ()
-		{
+		public TableQuery<T> Deferred () {
 			var q = Clone<T> ();
 			q._deferred = true;
 			return q;
 		}
 
-		public TableQuery<T> OrderBy<U> (Expression<Func<T, U>> orderExpr)
-		{
+		public TableQuery<T> OrderBy<U> (Expression<Func<T, U>> orderExpr) {
 			return AddOrderBy<U> (orderExpr, true);
 		}
 
-		public TableQuery<T> OrderByDescending<U> (Expression<Func<T, U>> orderExpr)
-		{
+		public TableQuery<T> OrderByDescending<U> (Expression<Func<T, U>> orderExpr) {
 			return AddOrderBy<U> (orderExpr, false);
 		}
 
-		public TableQuery<T> ThenBy<U>(Expression<Func<T, U>> orderExpr)
-		{
+		public TableQuery<T> ThenBy<U>(Expression<Func<T, U>> orderExpr) {
 			return AddOrderBy<U>(orderExpr, true);
 		}
 
-		public TableQuery<T> ThenByDescending<U>(Expression<Func<T, U>> orderExpr)
-		{
+		public TableQuery<T> ThenByDescending<U>(Expression<Func<T, U>> orderExpr) {
 			return AddOrderBy<U>(orderExpr, false);
 		}
 
-		private TableQuery<T> AddOrderBy<U> (Expression<Func<T, U>> orderExpr, bool asc)
-		{
+		private TableQuery<T> AddOrderBy<U> (Expression<Func<T, U>> orderExpr, bool asc) {
 			if (orderExpr.NodeType == ExpressionType.Lambda) {
 				var lambda = (LambdaExpression)orderExpr;
 
@@ -2303,19 +2291,21 @@ namespace SqlCipher4Unity3D {
 						Ascending = asc
 					});
 					return q;
-				} else {
+				}
+				else {
 					throw new NotSupportedException ("Order By does not support: " + orderExpr);
 				}
-			} else {
+			}
+			else {
 				throw new NotSupportedException ("Must be a predicate");
 			}
 		}
 
-		private void AddWhere (Expression pred)
-		{
+		private void AddWhere (Expression pred) {
 			if (_where == null) {
 				_where = pred;
-			} else {
+			}
+			else {
 				_where = Expression.AndAlso (_where, pred);
 			}
 		}
@@ -2324,8 +2314,7 @@ namespace SqlCipher4Unity3D {
 			TableQuery<TInner> inner,
 			Expression<Func<T, TKey>> outerKeySelector,
 			Expression<Func<TInner, TKey>> innerKeySelector,
-			Expression<Func<T, TInner, TResult>> resultSelector)
-		{
+			Expression<Func<T, TInner, TResult>> resultSelector) {
 			var q = new TableQuery<TResult> (Connection, Connection.GetMapping (typeof (TResult))) {
 				_joinOuter = this,
 				_joinOuterKeySelector = outerKeySelector,
@@ -2336,15 +2325,13 @@ namespace SqlCipher4Unity3D {
 			return q;
 		}
 
-		public TableQuery<TResult> Select<TResult> (Expression<Func<T, TResult>> selector)
-		{
+		public TableQuery<TResult> Select<TResult> (Expression<Func<T, TResult>> selector) {
 			var q = Clone<TResult> ();
 			q._selector = selector;
 			return q;
 		}
 
-		private SQLiteCommand GenerateCommand (string selectionList)
-		{
+		private SQLiteCommand GenerateCommand (string selectionList) {
 			if (_joinInner != null && _joinOuter != null) {
 				throw new NotSupportedException ("Joins are not supported.");
 			}
@@ -2372,15 +2359,7 @@ namespace SqlCipher4Unity3D {
 			}
 		}
 
-		class CompileResult
-		{
-			public string CommandText { get; set; }
-
-			public object Value { get; set; }
-		}
-
-		private CompileResult CompileExpr (Expression expr, List<object> queryArgs)
-		{
+		private CompileResult CompileExpr (Expression expr, List<object> queryArgs) {
 			if (expr == null)
 				throw new NotSupportedException ("Expression is NULL");
 
@@ -2399,7 +2378,8 @@ namespace SqlCipher4Unity3D {
 				else
 					text = "(" + leftr.CommandText + " " + GetSqlName(bin) + " " + rightr.CommandText + ")";
 				return new CompileResult { CommandText = text };
-			} else if (expr.NodeType == ExpressionType.Call) {
+			}
+			else if (expr.NodeType == ExpressionType.Call) {
 
 				var call = (MethodCallExpression)expr;
 				var args = new CompileResult[call.Arguments.Count];
@@ -2442,14 +2422,16 @@ namespace SqlCipher4Unity3D {
 				}
 				return new CompileResult { CommandText = sqlCall };
 
-			} else if (expr.NodeType == ExpressionType.Constant) {
+			}
+			else if (expr.NodeType == ExpressionType.Constant) {
 				var c = (ConstantExpression)expr;
 				queryArgs.Add (c.Value);
 				return new CompileResult {
 					CommandText = "?",
 					Value = c.Value
 				};
-			} else if (expr.NodeType == ExpressionType.Convert) {
+			}
+			else if (expr.NodeType == ExpressionType.Convert) {
 				var u = (UnaryExpression)expr;
 				var ty = u.Type;
 				var valr = CompileExpr (u.Operand, queryArgs);
@@ -2457,7 +2439,8 @@ namespace SqlCipher4Unity3D {
 					CommandText = valr.CommandText,
 					Value = valr.Value != null ? ConvertTo (valr.Value, ty) : null
 				};
-			} else if (expr.NodeType == ExpressionType.MemberAccess) {
+			}
+			else if (expr.NodeType == ExpressionType.MemberAccess) {
 				var mem = (MemberExpression)expr;
 
 				if (mem.Expression!=null && mem.Expression.NodeType == ExpressionType.Parameter) {
@@ -2467,7 +2450,8 @@ namespace SqlCipher4Unity3D {
 					//
 					var columnName = Table.FindColumnWithPropertyName (mem.Member.Name).Name;
 					return new CompileResult { CommandText = "\"" + columnName + "\"" };
-				} else {
+				}
+				else {
 					object obj = null;
 					if (mem.Expression != null) {
 						var r = CompileExpr (mem.Expression, queryArgs);
@@ -2493,7 +2477,8 @@ namespace SqlCipher4Unity3D {
 						var m = (PropertyInfo)mem.Member;
 						val = m.GetValue (obj, null);
 						#if !NETFX_CORE
-					} else if (mem.Member.MemberType == MemberTypes.Field) {
+					}
+					else if (mem.Member.MemberType == MemberTypes.Field) {
 						#else
 						} else if (mem.Member is FieldInfo) {
 						#endif
@@ -2503,7 +2488,8 @@ namespace SqlCipher4Unity3D {
 						var m = (FieldInfo)mem.Member;
 						val = m.GetValue (obj);
 						#endif
-					} else {
+					}
+					else {
 						#if !NETFX_CORE
 						throw new NotSupportedException ("MemberExpr: " + mem.Member.MemberType);
 						#else
@@ -2542,90 +2528,73 @@ namespace SqlCipher4Unity3D {
 			throw new NotSupportedException ("Cannot compile: " + expr.NodeType.ToString ());
 		}
 
-		static object ConvertTo (object obj, Type t)
-		{
+		static object ConvertTo (object obj, Type t) {
+			if (obj == null)
+				return null;				
+			
 			Type nut = Nullable.GetUnderlyingType(t);
-
-			if (nut != null) {
-				if (obj == null) return null;				
-				return Convert.ChangeType (obj, nut);
-			} else {
+			if (nut == null)
 				return Convert.ChangeType (obj, t);
-			}
+			return Convert.ChangeType (obj, nut);
 		}
 
 		/// <summary>
 		/// Compiles a BinaryExpression where one of the parameters is null.
 		/// </summary>
 		/// <param name="parameter">The non-null parameter</param>
-		private string CompileNullBinaryExpression(BinaryExpression expression, CompileResult parameter)
-		{
-			if (expression.NodeType == ExpressionType.Equal)
-				return "(" + parameter.CommandText + " is ?)";
-			else if (expression.NodeType == ExpressionType.NotEqual)
-				return "(" + parameter.CommandText + " is not ?)";
-			else
-				throw new NotSupportedException("Cannot compile Null-BinaryExpression with type " + expression.NodeType.ToString());
+		private string CompileNullBinaryExpression(BinaryExpression expression, CompileResult parameter) {
+			switch (expression.NodeType) {
+			case ExpressionType.Equal:		return "(" + parameter.CommandText + " is ?)";
+			case ExpressionType.NotEqual:	return "(" + parameter.CommandText + " is not ?)";
+			default:
+				throw new NotSupportedException ("Cannot compile Null-BinaryExpression with type " + expression.NodeType.ToString ());
+			}
 		}
 
-		string GetSqlName (Expression expr)
-		{
+		string GetSqlName (Expression expr) {
 			var n = expr.NodeType;
-			if (n == ExpressionType.GreaterThan)
-			return ">"; else if (n == ExpressionType.GreaterThanOrEqual) {
-				return ">=";
-			} else if (n == ExpressionType.LessThan) {
-				return "<";
-			} else if (n == ExpressionType.LessThanOrEqual) {
-				return "<=";
-			} else if (n == ExpressionType.And) {
-				return "&";
-			} else if (n == ExpressionType.AndAlso) {
-				return "and";
-			} else if (n == ExpressionType.Or) {
-				return "|";
-			} else if (n == ExpressionType.OrElse) {
-				return "or";
-			} else if (n == ExpressionType.Equal) {
-				return "=";
-			} else if (n == ExpressionType.NotEqual) {
-				return "!=";
-			} else {
+
+			switch (n) {
+			case ExpressionType.GreaterThan: 			return ">";
+			case ExpressionType.GreaterThanOrEqual:		return ">=";
+			case ExpressionType.LessThan:				return "<";
+			case ExpressionType.LessThanOrEqual:		return "<=";
+			case ExpressionType.And:					return "&";
+			case ExpressionType.AndAlso:				return "and";
+			case ExpressionType.Or:						return "|";
+			case ExpressionType.OrElse:					return "or";
+			case ExpressionType.Equal:					return "=";
+			case ExpressionType.NotEqual:				return "!=";
+			default:
 				throw new NotSupportedException ("Cannot get SQL for: " + n);
 			}
 		}
 
-		public int Count ()
-		{
+		public int Count () {
 			return GenerateCommand("count(*)").ExecuteScalar<int> ();			
 		}
 
-		public int Count (Expression<Func<T, bool>> predExpr)
-		{
+		public int Count (Expression<Func<T, bool>> predExpr) {
 			return Where (predExpr).Count ();
 		}
 
-		public IEnumerator<T> GetEnumerator ()
-		{
+		public IEnumerator<T> GetEnumerator () {
 			if (!_deferred)
 				return GenerateCommand("*").ExecuteQuery<T>().GetEnumerator();
 
 			return GenerateCommand("*").ExecuteDeferredQuery<T>().GetEnumerator();
 		}
 
-		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator ()
-		{
+		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator () {
 			return GetEnumerator ();
 		}
 
-		public T First ()
-		{
+		public T First () {
 			var query = Take (1);
 			return query.ToList<T>().First ();
 		}
 
-		public T FirstOrDefault ()
-		{
+		public T FirstOrDefault () {
 			var query = Take (1);
 			return query.ToList<T>().FirstOrDefault ();
 		}
