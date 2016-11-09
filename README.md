@@ -1,5 +1,7 @@
 # What's this?
 
+* If You are on Windows, need to `libeay32.dll` from https://wiki.openssl.org/index.php/Binaries
+
  This project was insprited in [SQLite4Unity3d](https://github.com/codecoding/SQLite4Unity3d).
 
  When I started with Unity3d development I needed to use SQLite in my project and it was very hard to me to find a place with simple instructions on how to make it work. All I got were links to paid solutions on the Unity3d's Assets Store and a lot of different and complicated tutorials.
