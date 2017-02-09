@@ -191,8 +191,8 @@ namespace SqlCipher4Unity3D
 		[DllImport(DLL_NAME, EntryPoint = "sqlite3_config", CallingConvention=CallingConvention.Cdecl)]
 		public static extern Result Config (ConfigOption option);
 
-		[DllImport(DLL_NAME, EntryPoint = "sqlite3_win32_set_directory", CallingConvention=CallingConvention.Cdecl, CharSet=CharSet.Unicode)]
-		public static extern int SetDirectory (uint directoryType, string directoryPath);
+		//[DllImport(DLL_NAME, EntryPoint = "sqlite3_win32_set_directory", CallingConvention=CallingConvention.Cdecl, CharSet=CharSet.Unicode)]
+		//public static extern int SetDirectory (uint directoryType, string directoryPath);
 
 		[DllImport(DLL_NAME, EntryPoint = "sqlite3_busy_timeout", CallingConvention=CallingConvention.Cdecl)]
 		public static extern Result BusyTimeout (IntPtr db, int milliseconds);

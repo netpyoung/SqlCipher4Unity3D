@@ -22,7 +22,9 @@ using Sqlite3DatabaseHandle = System.IntPtr;
 using Sqlite3Statement = System.IntPtr;
 #endif
 
-namespace SqlCipher4Unity3D {
+namespace SqlCipher4Unity3D
+{
+	using SQLite.Attribute;
 	/// <summary>
 	/// Represents an open connection to a SQLite database.
 	/// </summary>
@@ -60,7 +62,7 @@ namespace SqlCipher4Unity3D {
 		/// only here for backwards compatibility. There is a *significant* speed advantage, with no
 		/// down sides, when setting storeDateTimeAsTicks = true.
 		/// </param>
-		public SQLiteConnection (string databasePath, string password, bool storeDateTimeAsTicks = false)
+		public SQLiteConnection (string databasePath, string password = null, bool storeDateTimeAsTicks = false)
 			: this (databasePath, password, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create, storeDateTimeAsTicks)
 		{
 		}
@@ -104,7 +106,7 @@ namespace SqlCipher4Unity3D {
 				throw SQLiteException.New (r, String.Format ("Could not open database file: {0} ({1})", DatabasePath, r));
 			}
 
-			if (password != null) {
+			if (!string.IsNullOrEmpty(password)) {
 				var result = SQLite3.Key(handle, password, password.Length);
 				if (result != SQLite3.Result.OK) {
 					throw SQLiteException.New (r, String.Format ("Could not open database file: {0} ({1})", DatabasePath, r));

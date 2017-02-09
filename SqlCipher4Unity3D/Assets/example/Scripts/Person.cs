@@ -1,4 +1,4 @@
-﻿using SqlCipher4Unity3D;
+﻿using SQLite.Attribute;
 using UnityEngine.Scripting;
 
 [Preserve]
