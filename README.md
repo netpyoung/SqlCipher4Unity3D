@@ -1,6 +1,5 @@
-# What's this?
 
-* If You are on Windows, need to `libeay32.dll` from https://wiki.openssl.org/index.php/Binaries
+# What's this?
 
  This project was insprited in [SQLite4Unity3d](https://github.com/codecoding/SQLite4Unity3d).
 
@@ -13,6 +12,11 @@
 * Note: _SQLite4Unity3d uses only the synchronous part of sqlite-net, so all the calls to the database are synchronous._
 
  If you want to know more about why I created this plugin you can read more [here](http://www.codecoding.com/sqlite4unity3d-using-sqlite-net-library-and-unity3d-free-edition/).
+
+
+# Watchout
+* If You are on Windows, need to `libeay32.dll` from https://wiki.openssl.org/index.php/Binaries
+* If You are on iOS, need to modify [link.xml](https://docs.unity3d.com/Manual/iphone-playerSizeOptimization.html) for prevent stripping by Unity.
 
 
 # The fast track
