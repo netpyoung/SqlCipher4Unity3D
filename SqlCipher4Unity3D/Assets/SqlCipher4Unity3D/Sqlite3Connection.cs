@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -234,6 +233,15 @@ namespace SqlCipher4Unity3D
 			var query = string.Format("drop table if exists \"{0}\"", map.TableName);
 
 			return Execute (query);
+		}
+
+		public int DropTable(Type t)
+		{
+			var map = GetMapping(t);
+
+			var query = string.Format("drop table if exists \"{0}\"", map.TableName);
+
+			return Execute(query);
 		}
 
 		/// <summary>
