@@ -17,18 +17,28 @@
 # Watchout
 * If You are on Windows, need to `libeay32.dll` from https://wiki.openssl.org/index.php/Binaries
 * If You are on iOS, need to modify [link.xml](https://docs.unity3d.com/Manual/iphone-playerSizeOptimization.html) for prevent stripping by Unity.
+* Check [Issues](https://github.com/netpyoung/SqlCipher4Unity3D/issues)
 
 
 # The fast track
  All you have to do to start using it in your project:
 
-1. [Download this .unitypackage](https://github.com/netpyoung/SqlCipher4Unity3D/raw/master/SqlCipher4Unity3D.unitypackage), extract its content on your Unity3D Project. It contains the dlls that Unity3d will need to access sqlite.
+1. [Download this .unitypackage](https://github.com/netpyoung/SqlCipher4Unity3D/raw/master/SqlCipher4Unity3D-v1.0.0.unitypackage), extract its content on your Unity3D Project. It contains the dlls that Unity3d will need to access sqlite.
 4. **You’re done!**
+
+# Sqlchipher lib version
+* android : 3.5.9
+  - https://www.zetetic.net/sqlcipher/sqlcipher-for-android/
+  - precompiled : https://github.com/sqlcipher/sqlcipher-android-tests/tree/master/app/libs
+
+
 
 # Example
 If you want to try it I've uploaded a small example that you will be able to find in the "Example" folder. Download the folder and open it with Unity3d to give it a try. It contains classes that will help you to start.
 
 
+# codefix
+https://github.com/Leopotam/vscode-csharpfixformat
 
 # Acknowledgements
 This project is based on the work of:
