@@ -7,6 +7,7 @@ namespace example
 {
     public class CreateDBScript : MonoBehaviour
     {
+        [SerializeField]
         public Text DebugText;
 
         // Use this for initialization
