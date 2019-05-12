@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 namespace example
 {
-
     public class ExistingDBScript : MonoBehaviour
     {
         public Text DebugText;

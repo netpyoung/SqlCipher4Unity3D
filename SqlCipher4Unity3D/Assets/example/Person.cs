@@ -3,7 +3,6 @@ using UnityEngine.Scripting;
 
 namespace example
 {
-
     [Preserve]
     public class Person
     {

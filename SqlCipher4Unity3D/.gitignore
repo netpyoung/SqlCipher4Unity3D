@@ -30,3 +30,4 @@ UWP/
 !Assets/Plugin/**/*.dll
 
 /.vs/
+!codeformatter.csproj

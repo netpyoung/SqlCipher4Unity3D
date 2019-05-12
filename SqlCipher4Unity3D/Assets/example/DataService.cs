@@ -8,7 +8,6 @@ using System.IO;
 #endif
 namespace example
 {
-
     public class DataService
     {
         private readonly SQLiteConnection _connection;
@@ -18,11 +17,12 @@ namespace example
 #if UNITY_EDITOR
             string dbPath = string.Format(@"Assets/StreamingAssets/{0}", DatabaseName);
 #else
-// check if file exists in Application.persistentDataPath
-            string filepath = string.Format ("{0}/{1}", Application.persistentDataPath, DatabaseName);
-    
-            if (!File.Exists (filepath)) {
-                Debug.Log ("Database not in Persistent path");
+            // check if file exists in Application.persistentDataPath
+            string filepath = string.Format("{0}/{1}", Application.persistentDataPath, DatabaseName);
+
+            if (!File.Exists(filepath))
+            {
+                Debug.Log("Database not in Persistent path");
                 // if it doesn't ->
                 // open StreamingAssets directory and load the db ->
 
@@ -52,25 +52,25 @@ namespace example
                 string loadDb =
      Application.dataPath + "/StreamingAssets/" + DatabaseName; // this is the path to your StreamingAssets in iOS
                 // then save to Application.persistentDataPath
-                File.Copy (loadDb, filepath);
+                File.Copy(loadDb, filepath);
 
 #endif
 
-			Debug.Log ("Database written");
-		}
+                Debug.Log("Database written");
+            }
 
-		var dbPath = filepath;
+            var dbPath = filepath;
 #endif
-            this._connection = new SQLiteConnection(dbPath, "password");
+            _connection = new SQLiteConnection(dbPath, "password");
             Debug.Log("Final PATH: " + dbPath);
         }
 
         public void CreateDB()
         {
-            this._connection.DropTable<Person>();
-            this._connection.CreateTable<Person>();
+            _connection.DropTable<Person>();
+            _connection.CreateTable<Person>();
 
-            this._connection.InsertAll(new[]
+            _connection.InsertAll(new[]
             {
                 new Person
                 {
@@ -105,17 +105,17 @@ namespace example
 
         public IEnumerable<Person> GetPersons()
         {
-            return this._connection.Table<Person>();
+            return _connection.Table<Person>();
         }
 
         public IEnumerable<Person> GetPersonsNamedRoberto()
         {
-            return this._connection.Table<Person>().Where(x => x.Name == "Roberto");
+            return _connection.Table<Person>().Where(x => x.Name == "Roberto");
         }
 
         public Person GetJohnny()
         {
-            return this._connection.Table<Person>().Where(x => x.Name == "Johnny").FirstOrDefault();
+            return _connection.Table<Person>().Where(x => x.Name == "Johnny").FirstOrDefault();
         }
 
         public Person CreatePerson()
@@ -126,7 +126,7 @@ namespace example
                 Surname = "Mnemonic",
                 Age = 21
             };
-            this._connection.Insert(p);
+            _connection.Insert(p);
             return p;
         }
     }
