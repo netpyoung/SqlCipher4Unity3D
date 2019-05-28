@@ -1,3 +1,10 @@
+GIT_ROOT = `git rev-parse --show-toplevel`.strip
+
+task :default do
+  sh "rake -T"
+end
+
+desc 'code formatter'
 task :fmt do
   # https://github.com/dotnet/codeformatter
   # codeformatter /rules
@@ -19,5 +26,41 @@ task :fmt do
     enable_rules = ['BraceNewLine', 'UsingLocation', 'FormatDocument', 'NewLineAbove', 'ExplicitVisibility', 'IllegalHeaders', 'FieldNames']
     disable_rules = ['Copyright', 'CustomCopyright', 'UnicodeLiterals', 'ReadonlyFields', 'ExplicitThis']
     sh "codeformatter codeformatter.csproj /rule+:#{enable_rules.join(',')} /rule-:#{disable_rules.join(',')} /verbose"
+  end
+end
+
+
+desc 'library linux 64'
+task :lib_linux_64 do
+  puts 'NOTE(pyoung) building on Ubuntu 64bit'
+  build_dir = 'build/linux_64'
+  lib_dir = 'lib/linux_64'
+
+  sqlcipher_version = 'v3.4.2'
+
+  FileUtils.mkdir_p(build_dir) unless File.directory?(build_dir)
+  FileUtils.mkdir_p(lib_dir) unless File.directory?(lib_dir)
+
+  Dir.chdir(build_dir) do
+    sh 'sudo apt-get install tcl -y'
+    sh 'sudo apt-get install libssl-dev -y'
+    sh 'git clone https://github.com/sqlcipher/sqlcipher.git'
+    Dir.chdir('sqlcipher') do
+      sh "git checkout #{sqlcipher_version}"
+      sh './configure -enable-tempstore=no --disable-tcl CFLAGS="-DSQLITE_HAS_CODEC -DSQLCIPHER_CRYPTO_OPENSSL"'
+      sh 'make clean'
+      sh 'make sqlite3.c'
+      sh 'make'
+      libsqlcipher_fpath = `readlink -f .libs/libsqlcipher.so`.strip
+
+      # NOTE(pyoung)
+      # How find `libcrypto.so`
+      # apt-file find libssl-dev | grep libcrypto.so
+      libcrypto_fpath = `readlink -f /usr/lib/x86_64-linux-gnu/libcrypto.so`.strip
+      puts :libsqlcipher_fpath, libsqlcipher_fpath
+      puts :libcrypto_fpath, libcrypto_fpath
+      cp libsqlcipher_fpath, File.expand_path(File.join(GIT_ROOT, lib_dir, 'libsqlcipher.so'))
+      cp libcrypto_fpath, File.expand_path(File.join(GIT_ROOT, lib_dir, 'libcrypto.so'))
+    end
   end
 end
