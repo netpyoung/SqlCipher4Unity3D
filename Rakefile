@@ -64,3 +64,37 @@ task :lib_linux_64 do
     end
   end
 end
+
+desc 'library macos 64'
+task :lib_macos_64 do
+  puts "NOTE(pyoung) building on macOS 64bit"
+
+  build_dir = 'build/macOS_64'
+  lib_dir = 'lib/macOS_64'
+
+  sqlcipher_version = 'v3.4.2'
+
+  FileUtils.mkdir_p(build_dir) unless File.directory?(build_dir)
+  FileUtils.mkdir_p(lib_dir) unless File.directory?(lib_dir)
+
+  Dir.chdir(build_dir) do
+    sh 'brew install coreutils'
+    sh 'brew install tcl-tk'
+    sh 'brew install openssl'
+    sh 'git clone https://github.com/sqlcipher/sqlcipher.git'
+    Dir.chdir('sqlcipher') do
+      sh "git checkout #{sqlcipher_version}"
+      sh './configure -enable-tempstore=no --disable-tcl CFLAGS="-DSQLITE_HAS_CODEC -DSQLCIPHER_CRYPTO_OPENSSL -I/usr/local/opt/openssl/include/ -L/usr/local/opt/openssl/lib" LDFLAGS="-lcrypto"'
+      sh 'make clean'
+      sh 'make sqlite3.c'
+      sh 'make'
+      libsqlcipher_fpath = `greadlink -f .libs/libsqlcipher.dylib`.strip
+      libcrypto_fpath = `greadlink -f /usr/lib/libcrypto.dylib`.strip
+      puts :libsqlcipher_fpath, libsqlcipher_fpath
+      puts :libcrypto_fpath, libcrypto_fpath
+      cp libsqlcipher_fpath, File.expand_path(File.join(GIT_ROOT, lib_dir, 'sqlcipher.bundle'))
+      cp libcrypto_fpath, File.expand_path(File.join(GIT_ROOT, lib_dir, 'crypto.bundle'))
+    end
+  end
+
+end
