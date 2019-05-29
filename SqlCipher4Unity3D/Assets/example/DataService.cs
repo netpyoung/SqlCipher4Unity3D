@@ -48,12 +48,16 @@ namespace example
      Application.dataPath + "/StreamingAssets/" + DatabaseName; // this is the path to your StreamingAssets in iOS
                 // then save to Application.persistentDataPath
                 File.Copy (loadDb, filepath);
+#elif UNITY_STANDALONE_OSX
+                string loadDb =
+     Application.dataPath + "/Resources/Data/StreamingAssets/" + DatabaseName; // this is the path to your StreamingAssets in iOS
+                // then save to Application.persistentDataPath
+                File.Copy(loadDb, filepath);
 #else
                 string loadDb =
      Application.dataPath + "/StreamingAssets/" + DatabaseName; // this is the path to your StreamingAssets in iOS
                 // then save to Application.persistentDataPath
                 File.Copy(loadDb, filepath);
-
 #endif
 
                 Debug.Log("Database written");
