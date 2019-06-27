@@ -24,3 +24,6 @@ sysinfo.txt
 
 .DS_Store
 .idea/
+/mkmf.log
+/build/
+/lib/

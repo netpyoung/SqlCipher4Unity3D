@@ -1,4 +1,6 @@
-GIT_ROOT = `git rev-parse --show-toplevel`.strip
+require 'mkmf'
+GIT_ROOT = `git rev-parse --show-toplevel`.strip if find_executable 'git'
+RAKE_ROOT = Rake.application.original_dir
 
 task :default do
   sh "rake -T"
@@ -96,5 +98,57 @@ task :lib_macos_64 do
       cp libcrypto_fpath, File.expand_path(File.join(GIT_ROOT, lib_dir, 'crypto.bundle'))
     end
   end
+end
 
+desc 'library windows 64'
+task :lib_win_64 do
+  # [normal terminal]
+  # scoop install ruby msys2
+  # [mingw64 terminal]
+  # export PATH=$PATH:/c/Users/netpyoung/scoop/apps/ruby/current/gems/bin/:/c/Users/netpyoung/scoop/apps/ruby/current/bin/
+
+  # https://slproweb.com/products/Win32OpenSSL.html
+  # Win64 OpenSSL v1.0.2q # C:\OpenSSL-Win64 - check The OpenSSL binaries (/bin) directory
+  # Win32 OpenSSL v1.0.2q # C:\OpenSSL-Win32 - check The OpenSSL binaries (/bin) directory
+
+  build_dir = 'build/win_64'
+  lib_dir = 'lib/win_64'
+
+  sqlcipher_version = 'v3.4.2'
+
+  FileUtils.mkdir_p(build_dir) unless File.directory?(build_dir)
+  FileUtils.mkdir_p(lib_dir) unless File.directory?(lib_dir)
+  dst_libsqlcipher = File.join(`pwd`.strip, lib_dir, 'sqlcipher.dll')
+  dst_libcrypto = File.join(`pwd`.strip, lib_dir, 'libeay32.dll')
+
+  Dir.chdir(build_dir) do
+    sh 'pacman --noconfirm --needed -Syu'
+    sh 'pacman --noconfirm --needed -S git'
+    sh 'pacman --noconfirm --needed -S base-devel'
+    sh 'pacman --noconfirm --needed -S mingw32/mingw-w64-i686-gcc' # 32-bit
+    sh 'pacman --noconfirm --needed -S mingw64/mingw-w64-x86_64-gcc' # 64-bit
+    sh 'pacman --noconfirm --needed -S tcl'
+
+    sh 'git clone https://github.com/sqlcipher/sqlcipher.git'
+    Dir.chdir('sqlcipher') do
+      sh "git checkout #{sqlcipher_version}"
+      pwd = `pwd`.strip
+      puts pwd
+
+      open_ssl_dir = '/c/OpenSSL-Win64'
+      libcrypto_fpath = "#{open_ssl_dir}/bin/libeay32.dll"
+      sh "cp #{libcrypto_fpath} ./"
+
+      sh %Q[sh ./configure --with-crypto-lib=none --disable-tcl CFLAGS="-DSQLITE_HAS_CODEC -DSQLCIPHER_CRYPTO_OPENSSL -I#{open_ssl_dir}/include #{open_ssl_dir}/bin/libeay32.dll -L#{pwd} -static-libgcc" LDFLAGS="-leay32"]
+      sh 'make clean'
+      sh 'make sqlite3.c'
+      sh 'make'
+      sh 'make dll'
+      libsqlcipher_fpath = '.libs/libsqlcipher-0.dll'
+      puts :libsqlcipher_fpath, libsqlcipher_fpath
+      puts :libcrypto_fpath, libcrypto_fpath
+      sh "cp #{libsqlcipher_fpath} #{dst_libsqlcipher}"
+      sh "cp #{libcrypto_fpath} #{dst_libcrypto}"
+    end
+  end
 end
