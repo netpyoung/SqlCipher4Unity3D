@@ -152,3 +152,15 @@ task :lib_win_64 do
     end
   end
 end
+
+desc 'library android'
+task :lib_android do
+  lib_dir = 'lib/android'
+
+  sqlcipher_version = '3.5.9'
+  FileUtils.mkdir_p(lib_dir) unless File.directory?(lib_dir)
+
+  Dir.chdir(lib_dir) do
+    sh "mvn org.apache.maven.plugins:maven-dependency-plugin:2.8:get -DremoteRepositories=https://repo.maven.apache.org/maven2 -Dartifact=net.zetetic:android-database-sqlcipher:#{sqlcipher_version}:aar -Ddest=android-database-sqlcipher-#{sqlcipher_version}.aar"
+  end
+end

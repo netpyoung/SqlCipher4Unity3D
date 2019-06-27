@@ -35,7 +35,7 @@
 * android : 3.5.9
   - https://www.zetetic.net/sqlcipher/sqlcipher-for-android/
   - precompiled : https://github.com/sqlcipher/sqlcipher-android-tests/tree/master/app/libs
-
+  - https://github.com/sqlcipher/sqlcipher-android-tests/blob/53dd9a1eec489946f01254873f96fb9f853ad370/app/libs/android-database-sqlcipher-3.5.9.aar
 
 
 # Example
