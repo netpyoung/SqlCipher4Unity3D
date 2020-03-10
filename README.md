@@ -14,17 +14,18 @@
 
 ## Support Platforms
 
-| Platforms |       | Support? | SQLCipherVersion                                                                                                                                           |
-|-----------|-------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Windows   | 32bit | O        | v3.4.2                                                                                                                                                     |
-| Windows   | 64bit | O        | v3.4.2                                                                                                                                                     |
-| Linux     | 64bit | O        | v3.4.2                                                                                                                                                     |
-| macOS     | 64bit | O        | v3.4.2                                                                                                                                                     |
-| iOS       | 64bit | O        | v3.4.2                                                                                                                                                     |
-| Android   | armv7 | O        | [v3.5.9](https://github.com/sqlcipher/sqlcipher-android-tests/blob/53dd9a1eec489946f01254873f96fb9f853ad370/app/libs/android-database-sqlcipher-3.5.9.aar) |
-| Android   | arm64 | O        | [v3.5.9](https://github.com/sqlcipher/sqlcipher-android-tests/blob/53dd9a1eec489946f01254873f96fb9f853ad370/app/libs/android-database-sqlcipher-3.5.9.aar) |
-| Linux     | 32bit | X        |                                                                                                                                                            |
-| WebGL     |       | X        |                                                                                                                                                            |
+| Platforms |       | Support? | SQLCipherVersion                                                                          |
+|-----------|-------|----------|-------------------------------------------------------------------------------------------|
+| Windows   | 32bit | O        | v4.3.0                                                                                    |
+| Windows   | 64bit | O        | v4.3.0                                                                                    |
+| Linux     | 64bit | O        | v3.4.2 -> v4.3.0(WIP)                                                                     |
+| macOS     | 64bit | O        | [v4.3.0](https://github.com/jfcontart/SqlCipher4Unity3D_Apple)                            |
+| iOS       | 64bit | O        | [v4.3.0](https://github.com/jfcontart/SqlCipher4Unity3D_Apple)                            |
+| tvOS      | 64bit | O        | [v4.3.0](https://github.com/jfcontart/SqlCipher4Unity3D_Apple)                            |
+| Android   | armv7 | O        | [v4.3.0](https://mvnrepository.com/artifact/net.zetetic/android-database-sqlcipher/4.3.0) |
+| Android   | arm64 | O        | [v4.3.0](https://mvnrepository.com/artifact/net.zetetic/android-database-sqlcipher/4.3.0) |
+| Linux     | 32bit | X        |                                                                                           |
+| WebGL     |       | X        |                                                                                           |
 
 ## Watchout
 
@@ -44,15 +45,20 @@ All you have to do to start using it in your project:
 - [./SqlCipher4Unity3D/Assets/example/](./SqlCipher4Unity3D/Assets/example/)
 - [./SqlCipher4Unity3D/Assets/test/](./SqlCipher4Unity3D/Assets/test/)
 
+## Contributer
+
+- [@jfcontart](https://github.com/jfcontart)
+
 ## LICENCE
 
-| project                                                        | license                                                                      |
-|----------------------------------------------------------------|------------------------------------------------------------------------------|
-| [SqlCipher4Unity3d](./)                                        | [MIT](https://github.com/robertohuertasm/SQLite4Unity3d/blob/master/LICENSE) |
-| [SQLite4Unity3d](https://github.com/codecoding/SQLite4Unity3d) | [MIT](https://github.com/codecoding/SQLite4Unity3d/blob/master/LICENSE)      |
-| [Sqlite-net](https://github.com/praeclarum/sqlite-net)         | [MIT](https://github.com/praeclarum/sqlite-net/blob/master/LICENSE.txt)      |
-| [SQLite](sqlite370_banner.gif)                                 | [SQLite's License](https://sqlite.org/copyright.html)                        |
-| [SQLCipher](https://www.zetetic.net/sqlcipher/)                | [SQLCipher's License](https://www.zetetic.net/sqlcipher/license/)            |
+| project                                                                             | license                                                                 |
+|-------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| [netpyoung/SqlCipher4Unity3d](./)                                                   | [MIT](./LICENSE)                                                        |
+| [jfcontart/SqlCipher4Unity3D_Apple]                                                 | [copyleft](https://github.com/jfcontart/SqlCipher4Unity3D_Apple)        |
+| [robertohuertasm/SQLite4Unity3d](https://github.com/robertohuertasm/SQLite4Unity3d) | [MIT](https://github.com/codecoding/SQLite4Unity3d/blob/master/LICENSE) |
+| [praeclarum/Sqlite-net](https://github.com/praeclarum/sqlite-net)                   | [MIT](https://github.com/praeclarum/sqlite-net/blob/master/LICENSE.txt) |
+| [SQLite](sqlite370_banner.gif)                                                      | [SQLite's License](https://sqlite.org/copyright.html)                   |
+| [SQLCipher](https://www.zetetic.net/sqlcipher/)                                     | [SQLCipher's License](https://www.zetetic.net/sqlcipher/license/)       |
 
 ### SQLite's Licnese
 
