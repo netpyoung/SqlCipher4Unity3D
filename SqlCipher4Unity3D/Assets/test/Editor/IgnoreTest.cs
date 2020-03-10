@@ -50,6 +50,15 @@ namespace Test
 
             return true;
         }
+
+        public override int GetHashCode()
+        {
+            var hashCode = 480581749;
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(this.ID);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(this.CompanyID);
+            hashCode = hashCode * -1521134295 + EqualityComparer<Company>.Default.GetHashCode(this.Company);
+            return hashCode;
+        }
     }
 
     [TestFixture]

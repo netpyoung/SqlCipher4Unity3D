@@ -24,7 +24,9 @@ namespace SqlCipher4Unity3D
         ///     Used to list some code that we want the MonoTouch linker
         ///     to see, but that we never want to actually execute.
         /// </summary>
+#pragma warning disable CS0649
         private static bool s_preserveDuringLinkMagic;
+#pragma warning restore CS0649
 
         private readonly Random _rand = new Random();
 
