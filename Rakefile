@@ -1,6 +1,21 @@
 require 'mkmf'
+require 'tempfile'
+require "open-uri"
+
 GIT_ROOT = `git rev-parse --show-toplevel`.strip if find_executable 'git'
 RAKE_ROOT = Rake.application.original_dir
+
+def file_edit(filename, regexp, replacement)
+  Tempfile.open(".#{File.basename(filename)}", File.dirname(filename)) do |tempfile|
+    f = File.open(filename)
+	f.each do |line|
+      tempfile.puts line.gsub(regexp, replacement)
+    end
+	f.close
+    tempfile.close
+    mv tempfile.path, filename
+  end
+end
 
 task :default do
   sh "rake -T"
@@ -32,9 +47,9 @@ task :fmt do
 end
 
 
-desc 'library linux 64'
+desc 'library linux 64(WIP)'
 task :lib_linux_64 do
-  puts 'NOTE(pyoung) building on Ubuntu 64bit'
+  puts 'NOTE(pyoung) building on Ubuntu 64bit - v3.4.2 (deprecated) -> v4.3.0'
   build_dir = 'build/linux_64'
   lib_dir = 'lib/linux_64'
 
@@ -67,9 +82,10 @@ task :lib_linux_64 do
   end
 end
 
-desc 'library macos 64'
-task :lib_macos_64 do
-  puts "NOTE(pyoung) building on macOS 64bit"
+desc 'library macos 64(deprecated)'
+task :lib_macos_64_old do
+  puts "NOTE(pyoung) building on macOS 64bit (deprecated)"
+  puts "checkout https://github.com/jfcontart/SqlCipher4Unity3D_Apple"
 
   build_dir = 'build/macOS_64'
   lib_dir = 'lib/macOS_64'
@@ -108,18 +124,18 @@ task :lib_win_64 do
   # export PATH=$PATH:/c/Users/netpyoung/scoop/apps/ruby/current/gems/bin/:/c/Users/netpyoung/scoop/apps/ruby/current/bin/
 
   # https://slproweb.com/products/Win32OpenSSL.html
-  # Win64 OpenSSL v1.0.2q # C:\OpenSSL-Win64 - check The OpenSSL binaries (/bin) directory
-  # Win32 OpenSSL v1.0.2q # C:\OpenSSL-Win32 - check The OpenSSL binaries (/bin) directory
+  # Win64 OpenSSL v1.1.0L # C:\OpenSSL-Win64 - check The OpenSSL binaries (/bin) directory
+  # Win32 OpenSSL v1.1.0L # C:\OpenSSL-Win32 - check The OpenSSL binaries (/bin) directory
 
   build_dir = 'build/win_64'
   lib_dir = 'lib/win_64'
 
-  sqlcipher_version = 'v3.4.2'
+  sqlcipher_version = 'v4.3.0'
 
   FileUtils.mkdir_p(build_dir) unless File.directory?(build_dir)
   FileUtils.mkdir_p(lib_dir) unless File.directory?(lib_dir)
   dst_libsqlcipher = File.join(`pwd`.strip, lib_dir, 'sqlcipher.dll')
-  dst_libcrypto = File.join(`pwd`.strip, lib_dir, 'libeay32.dll')
+  dst_libcrypto = File.join(`pwd`.strip, lib_dir, 'libcrypto-1_1-x64.dll')
 
   Dir.chdir(build_dir) do
     sh 'pacman --noconfirm --needed -Syu'
@@ -136,15 +152,16 @@ task :lib_win_64 do
       puts pwd
 
       open_ssl_dir = '/c/OpenSSL-Win64'
-      libcrypto_fpath = "#{open_ssl_dir}/bin/libeay32.dll"
+      libcrypto_fpath = "#{open_ssl_dir}/bin/libcrypto-1_1-x64.dll"
       sh "cp #{libcrypto_fpath} ./"
+      file_edit('configure', /for ac_option in --version -v -V -qversion; do/, "for ac_option in --version -v; do")
 
-      sh %Q[sh ./configure --with-crypto-lib=none --disable-tcl CFLAGS="-DSQLITE_HAS_CODEC -DSQLCIPHER_CRYPTO_OPENSSL -I#{open_ssl_dir}/include #{open_ssl_dir}/bin/libeay32.dll -L#{pwd} -static-libgcc" LDFLAGS="-leay32"]
+      sh %Q[sh ./configure --with-crypto-lib=none --disable-tcl CFLAGS="-DSQLITE_HAS_CODEC -DSQLCIPHER_CRYPTO_OPENSSL -I#{open_ssl_dir}/include #{open_ssl_dir}/bin/libcrypto-1_1-x64.dll -L#{pwd} -static-libgcc" LDFLAGS="-llibcrypto-1_1-x64"]
       sh 'make clean'
       sh 'make sqlite3.c'
       sh 'make'
       sh 'make dll'
-      libsqlcipher_fpath = '.libs/libsqlcipher-0.dll'
+      libsqlcipher_fpath = 'sqlite3.dll'
       puts :libsqlcipher_fpath, libsqlcipher_fpath
       puts :libcrypto_fpath, libcrypto_fpath
       sh "cp #{libsqlcipher_fpath} #{dst_libsqlcipher}"
@@ -161,18 +178,18 @@ task :lib_win_32 do
   # export PATH=$PATH:/c/Users/netpyoung/scoop/apps/ruby/current/gems/bin/:/c/Users/netpyoung/scoop/apps/ruby/current/bin/
 
   # https://slproweb.com/products/Win32OpenSSL.html
-  # Win64 OpenSSL v1.0.2q # C:\OpenSSL-Win64 - check The OpenSSL binaries (/bin) directory
-  # Win32 OpenSSL v1.0.2q # C:\OpenSSL-Win32 - check The OpenSSL binaries (/bin) directory
+  # Win64 OpenSSL v1.1.0L # C:\OpenSSL-Win64 - check The OpenSSL binaries (/bin) directory
+  # Win32 OpenSSL v1.1.0L # C:\OpenSSL-Win32 - check The OpenSSL binaries (/bin) directory
 
   build_dir = 'build/win_32'
   lib_dir = 'lib/win_32'
 
-  sqlcipher_version = 'v3.4.2'
+  sqlcipher_version = 'v4.3.0'
 
   FileUtils.mkdir_p(build_dir) unless File.directory?(build_dir)
   FileUtils.mkdir_p(lib_dir) unless File.directory?(lib_dir)
   dst_libsqlcipher = File.join(`pwd`.strip, lib_dir, 'sqlcipher.dll')
-  dst_libcrypto = File.join(`pwd`.strip, lib_dir, 'libeay32.dll')
+  dst_libcrypto = File.join(`pwd`.strip, lib_dir, 'libcrypto-1_1.dll')
 
   Dir.chdir(build_dir) do
     sh 'pacman --noconfirm --needed -Syu'
@@ -188,15 +205,17 @@ task :lib_win_32 do
       puts pwd
 
       open_ssl_dir = '/c/OpenSSL-Win32'
-      libcrypto_fpath = "#{open_ssl_dir}/bin/libeay32.dll"
+      libcrypto_fpath = "#{open_ssl_dir}/bin/libcrypto-1_1.dll"
       sh "cp #{libcrypto_fpath} ./"
 
-      sh %Q[sh ./configure --with-crypto-lib=none --disable-tcl CFLAGS="-DSQLITE_HAS_CODEC -DSQLCIPHER_CRYPTO_OPENSSL -I#{open_ssl_dir}/include #{open_ssl_dir}/bin/libeay32.dll -L#{pwd} -static-libgcc" LDFLAGS="-leay32"]
+      file_edit('configure', /for ac_option in --version -v -V -qversion; do/, "for ac_option in --version -v; do")
+
+      sh %Q[sh ./configure --with-crypto-lib=none --disable-tcl CFLAGS="-DSQLITE_HAS_CODEC -DSQLCIPHER_CRYPTO_OPENSSL -I#{open_ssl_dir}/include #{open_ssl_dir}/bin/libcrypto-1_1.dll -L#{pwd} -static-libgcc" LDFLAGS="-llibcrypto-1_1"]
       sh 'make clean'
       sh 'make sqlite3.c'
       sh 'make'
       sh 'make dll'
-      libsqlcipher_fpath = '.libs/libsqlcipher-0.dll'
+      libsqlcipher_fpath = 'sqlite3.dll'
       puts :libsqlcipher_fpath, libsqlcipher_fpath
       puts :libcrypto_fpath, libcrypto_fpath
       sh "cp #{libsqlcipher_fpath} #{dst_libsqlcipher}"
@@ -210,10 +229,32 @@ desc 'library android'
 task :lib_android do
   lib_dir = 'lib/android'
 
-  sqlcipher_version = '3.5.9'
+  # ref: https://www.zetetic.net/sqlcipher/sqlcipher-for-android/
+  sqlcipher_version = '4.3.0'
+  sqlite_version = '2.0.1'
+  # annotation_version = '1.0.2'
+  
   FileUtils.mkdir_p(lib_dir) unless File.directory?(lib_dir)
 
   Dir.chdir(lib_dir) do
-    sh "mvn org.apache.maven.plugins:maven-dependency-plugin:2.8:get -DremoteRepositories=https://repo.maven.apache.org/maven2 -Dartifact=net.zetetic:android-database-sqlcipher:#{sqlcipher_version}:aar -Ddest=android-database-sqlcipher-#{sqlcipher_version}.aar"
+    #sh "mvn org.apache.maven.plugins:maven-dependency-plugin:2.8:get -DremoteRepositories=https://repo.maven.apache.org/maven2 -Dartifact=net.zetetic:android-database-sqlcipher:#{sqlcipher_version}:aar -Ddest=android-database-sqlcipher-#{sqlcipher_version}.aar"
+
+	open("https://repo1.maven.org/maven2/net/zetetic/android-database-sqlcipher/#{sqlcipher_version}/android-database-sqlcipher-#{sqlcipher_version}.aar") do |aar|
+	  File.open("android-database-sqlcipher-#{sqlcipher_version}.aar", "wb") do |file|
+		file.write(aar.read)
+	  end
+	end
+
+	#open("https://maven.google.com/androidx/annotation/annotation/#{annotation_version}/annotation-#{annotation_version}.jar") do |jar|
+	#  File.open("annotation-#{annotation_version}.jar", "wb") do |file|
+	#	file.write(jar.read)
+	#  end
+	#end	
+		
+	open("https://maven.google.com/androidx/sqlite/sqlite/#{sqlite_version}/sqlite-#{sqlite_version}.aar") do |aar|
+	  File.open("sqlite-#{sqlite_version}.aar", "wb") do |file|
+		file.write(aar.read)
+	  end
+	end
   end
 end
