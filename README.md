@@ -51,14 +51,14 @@ All you have to do to start using it in your project:
 
 ## LICENCE
 
-| project                                                                             | license                                                                 |
-|-------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
-| [netpyoung/SqlCipher4Unity3d](./)                                                   | [MIT](./LICENSE)                                                        |
-| [jfcontart/SqlCipher4Unity3D_Apple]                                                 | [copyleft](https://github.com/jfcontart/SqlCipher4Unity3D_Apple)        |
-| [robertohuertasm/SQLite4Unity3d](https://github.com/robertohuertasm/SQLite4Unity3d) | [MIT](https://github.com/codecoding/SQLite4Unity3d/blob/master/LICENSE) |
-| [praeclarum/Sqlite-net](https://github.com/praeclarum/sqlite-net)                   | [MIT](https://github.com/praeclarum/sqlite-net/blob/master/LICENSE.txt) |
-| [SQLite](sqlite370_banner.gif)                                                      | [SQLite's License](https://sqlite.org/copyright.html)                   |
-| [SQLCipher](https://www.zetetic.net/sqlcipher/)                                     | [SQLCipher's License](https://www.zetetic.net/sqlcipher/license/)       |
+| project                                                                                   | license                                                                 |
+|-------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| [netpyoung/SqlCipher4Unity3d](./)                                                         | [MIT](./LICENSE)                                                        |
+| [jfcontart/SqlCipher4Unity3D_Apple](https://github.com/jfcontart/SqlCipher4Unity3D_Apple) | [copyleft](https://github.com/jfcontart/SqlCipher4Unity3D_Apple)        |
+| [robertohuertasm/SQLite4Unity3d](https://github.com/robertohuertasm/SQLite4Unity3d)       | [MIT](https://github.com/codecoding/SQLite4Unity3d/blob/master/LICENSE) |
+| [praeclarum/Sqlite-net](https://github.com/praeclarum/sqlite-net)                         | [MIT](https://github.com/praeclarum/sqlite-net/blob/master/LICENSE.txt) |
+| [SQLite](sqlite370_banner.gif)                                                            | [SQLite's License](https://sqlite.org/copyright.html)                   |
+| [SQLCipher](https://www.zetetic.net/sqlcipher/)                                           | [SQLCipher's License](https://www.zetetic.net/sqlcipher/license/)       |
 
 ### SQLite's Licnese
 
