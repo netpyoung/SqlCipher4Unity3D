@@ -47,13 +47,13 @@ task :fmt do
 end
 
 
-desc 'library linux 64(WIP)'
+desc 'library linux 64'
 task :lib_linux_64 do
-  puts 'NOTE(pyoung) building on Ubuntu 64bit - v3.4.2 (deprecated) -> v4.3.0'
+  puts 'NOTE(pyoung) building on Ubuntu 64bit - v4.3.0'
   build_dir = 'build/linux_64'
   lib_dir = 'lib/linux_64'
 
-  sqlcipher_version = 'v3.4.2'
+  sqlcipher_version = 'v4.3.0'
 
   FileUtils.mkdir_p(build_dir) unless File.directory?(build_dir)
   FileUtils.mkdir_p(lib_dir) unless File.directory?(lib_dir)
