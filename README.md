@@ -36,8 +36,10 @@
 
 All you have to do to start using it in your project:
 
-1. [Download this .unitypackage](https://github.com/netpyoung/SqlCipher4Unity3D/raw/master/SqlCipher4Unity3D-v1.0.1.unitypackage), extract its content on your Unity3D Project. It contains the dlls that Unity3d will need to access sqlite.
+1. [Download this .unitypackage](https://github.com/netpyoung/SqlCipher4Unity3D/releases/download/v1.0.2/SqlCipher4Unity3D-v1.0.2.unitypackage), extract its content on your Unity3D Project. It contains the dlls that Unity3d will need to access sqlite.
 2. **You’re done!**
+  - Now I'm working on apply sqlcipher 4.3.0 on [this branch](https://github.com/netpyoung/SqlCipher4Unity3D/tree/apply.4.3.0) but It needs a time to test.
+  - ref : [#25](https://github.com/netpyoung/SqlCipher4Unity3D/issues/25)
 
 ## Examples & Tests
 
