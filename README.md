@@ -36,10 +36,12 @@
 
 ## Compatibility
 
-| SqlCipher4Unity3D tag | sqlcipher version |
-|-----------------------|-------------------|
-| v1.1.x                | v4.x.x            |
-| v1.0.x                | v3.x.x            |
+From `1.1.0` I removed `v` prefix for support UPM.
+
+| SqlCipher4Unity3D tag | sqlcipher version                                                                                                |
+|-----------------------|------------------------------------------------------------------------------------------------------------------|
+| 1.1.x                 | 4.x.x                                                                                                           |
+| v1.0.x                | [3.x.x](https://github.com/netpyoung/SqlCipher4Unity3D/blob/2c642b3f0387dadfb4a145cb7236e99c9109fb94/README.md) |
 
 ## The fast track
 
@@ -53,6 +55,12 @@ All you have to do to start using it in your project:
 
 - [./SqlCipher4Unity3D/Assets/example/](./SqlCipher4Unity3D/Assets/example/)
 - [./SqlCipher4Unity3D/Assets/test/](./SqlCipher4Unity3D/Assets/test/)
+
+## UPM
+
+``` json
+"com.netpyoung.sqlcipher4unity3d": "https://github.com/netpyoung/SqlCipher4Unity3D.git?path=SqlCipher4Unity3D/Assets/SqlCipher4Unity3D#1.1.0"
+```
 
 ## Contributer(❤️)
 
