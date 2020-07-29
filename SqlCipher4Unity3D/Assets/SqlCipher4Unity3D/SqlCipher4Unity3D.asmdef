@@ -1,3 +1,13 @@
-﻿{
-	"name": "SqlCipher4Unity3D"
+{
+    "name": "SqlCipher4Unity3D",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": true
 }
