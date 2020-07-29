@@ -26,14 +26,13 @@
 | Android   | arm64_v8a   | O        | [v4.3.0](https://mvnrepository.com/artifact/net.zetetic/android-database-sqlcipher/4.3.0) |
 | Android   | x86         | O        | [v4.3.0](https://mvnrepository.com/artifact/net.zetetic/android-database-sqlcipher/4.3.0) |
 | Android   | x86_64      | O        | [v4.3.0](https://mvnrepository.com/artifact/net.zetetic/android-database-sqlcipher/4.3.0) |
-| Linux     | 32bit       | X        |                                                                                           |
+| Linux     | x86         | X        |                                                                                           |
 | WebGL     |             | X        |                                                                                           |
 
 ## Watchout
 
-- If You are on Windows, need to `libeay32.dll` from <https://wiki.openssl.org/index.php/Binaries>
-- If You are on iOS, need to modify [link.xml](https://docs.unity3d.com/Manual/iphone-playerSizeOptimization.html) for prevent stripping by Unity.
 - Check [Issues](https://github.com/netpyoung/SqlCipher4Unity3D/issues)
+- If You are on iOS, need to modify [link.xml](https://docs.unity3d.com/Manual/iphone-playerSizeOptimization.html) for prevent stripping by Unity.
 
 ## The fast track
 
