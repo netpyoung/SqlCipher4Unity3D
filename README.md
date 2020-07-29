@@ -18,7 +18,7 @@
 |-----------|-------------|----------|-------------------------------------------------------------------------------------------|
 | Windows   | x86         | O        | v4.3.0                                                                                    |
 | Windows   | x86_64      | O        | v4.3.0                                                                                    |
-| Linux     | x86_64      | O        | v3.4.2 -> v4.3.0(WIP)                                                                     |
+| Linux     | x86_64      | O        | v4.3.0                                                                                    |
 | macOS     | x86_64      | O        | [v4.3.0](https://github.com/jfcontart/SqlCipher4Unity3D_Apple)                            |
 | iOS       | 64bit       | O        | [v4.3.0](https://github.com/jfcontart/SqlCipher4Unity3D_Apple)                            |
 | tvOS      | 64bit       | O        | [v4.3.0](https://github.com/jfcontart/SqlCipher4Unity3D_Apple)                            |
@@ -34,23 +34,29 @@
 - Check [Issues](https://github.com/netpyoung/SqlCipher4Unity3D/issues)
 - If You are on iOS, need to modify [link.xml](https://docs.unity3d.com/Manual/iphone-playerSizeOptimization.html) for prevent stripping by Unity.
 
+## Compatibility
+
+| SqlCipher4Unity3D tag | sqlcipher version |
+|-----------------------|-------------------|
+| v1.1.x                | v4.x.x            |
+| v1.0.x                | v3.x.x            |
+
 ## The fast track
 
 All you have to do to start using it in your project:
 
-1. [Download this .unitypackage](https://github.com/netpyoung/SqlCipher4Unity3D/releases/download/v1.0.2/SqlCipher4Unity3D-v1.0.2.unitypackage), extract its content on your Unity3D Project. It contains the dlls that Unity3d will need to access sqlite.
+1. Download unitypackage, then extract its content on your Unity3D Project. It contains the dlls that Unity3d will need to access sqlite.
+   - [v1.0.2.unitypackage](https://github.com/netpyoung/SqlCipher4Unity3D/releases/download/v1.0.2/SqlCipher4Unity3D-v1.0.2.unitypackage),
 2. **You’re done!**
-  - Now I'm working on apply sqlcipher 4.3.0 on [this branch](https://github.com/netpyoung/SqlCipher4Unity3D/tree/apply.4.3.0) but It needs a time to test.
-  - ref : [#25](https://github.com/netpyoung/SqlCipher4Unity3D/issues/25)
 
 ## Examples & Tests
 
 - [./SqlCipher4Unity3D/Assets/example/](./SqlCipher4Unity3D/Assets/example/)
 - [./SqlCipher4Unity3D/Assets/test/](./SqlCipher4Unity3D/Assets/test/)
 
-## Contributer
+## Contributer(❤️)
 
-- [@jfcontart](https://github.com/jfcontart)
+- [@jfcontart]
 
 ## LICENCE
 
@@ -92,28 +98,32 @@ other projects.
 ### SQLCipher's Licnese
 
 ``` license
-            Copyright (c) 2008-2012 Zetetic LLC
-            All rights reserved.
+Copyright (c) 2008-2012 Zetetic LLC
+All rights reserved.
 
-            Redistribution and use in source and binary forms, with or without
-            modification, are permitted provided that the following conditions are met:
-                * Redistributions of source code must retain the above copyright
-                  notice, this list of conditions and the following disclaimer.
-                * Redistributions in binary form must reproduce the above copyright
-                  notice, this list of conditions and the following disclaimer in the
-                  documentation and/or other materials provided with the distribution.
-                * Neither the name of the ZETETIC LLC nor the
-                  names of its contributors may be used to endorse or promote products
-                  derived from this software without specific prior written permission.
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of the ZETETIC LLC nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
 
-            THIS SOFTWARE IS PROVIDED BY ZETETIC LLC ''AS IS'' AND ANY
-            EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-            WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-            DISCLAIMED. IN NO EVENT SHALL ZETETIC LLC BE LIABLE FOR ANY
-            DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-            (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-            LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
-            ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-            (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-            SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+THIS SOFTWARE IS PROVIDED BY ZETETIC LLC ''AS IS'' AND ANY
+EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL ZETETIC LLC BE LIABLE FOR ANY
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ```
+
+----------------
+
+[@jfcontart]: https://github.com/jfcontart
