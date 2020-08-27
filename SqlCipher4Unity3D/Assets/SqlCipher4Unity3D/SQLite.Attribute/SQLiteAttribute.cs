@@ -1,97 +1,125 @@
 using System;
 
-namespace SQLite.Attribute
+namespace SQLite.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
-    public class ExportAttribute : System.Attribute
+    public class ExportAttribute : Attribute
     {
     }
 
     [AttributeUsage(AttributeTargets.Class)]
-    public class TableAttribute : System.Attribute
-    {
-        public TableAttribute(string name)
-        {
-            this.Name = name;
-        }
+	public class TableAttribute : Attribute
+	{
+		public string Name { get; set; }
 
-        public string Name { get; set; }
-    }
+		/// <summary>
+		/// Flag whether to create the table without rowid (see https://sqlite.org/withoutrowid.html)
+		///
+		/// The default is <c>false</c> so that sqlite adds an implicit <c>rowid</c> to every table created.
+		/// </summary>
+		public bool WithoutRowId { get; set; }
 
-    [AttributeUsage(AttributeTargets.Property)]
-    public class ColumnAttribute : System.Attribute
-    {
-        public ColumnAttribute(string name)
-        {
-            this.Name = name;
-        }
+		public TableAttribute(string name)
+		{
+			Name = name;
+		}
+	}
 
-        public string Name { get; set; }
-    }
+	[AttributeUsage(AttributeTargets.Property)]
+	public class ColumnAttribute : Attribute
+	{
+		public string Name { get; set; }
 
-    [AttributeUsage(AttributeTargets.Property)]
-    public class PrimaryKeyAttribute : System.Attribute
-    {
-    }
+		public ColumnAttribute(string name)
+		{
+			Name = name;
+		}
+	}
 
-    [AttributeUsage(AttributeTargets.Property)]
-    public class AutoIncrementAttribute : System.Attribute
-    {
-    }
+	[AttributeUsage(AttributeTargets.Property)]
+	public class PrimaryKeyAttribute : Attribute
+	{
+	}
 
-    [AttributeUsage(AttributeTargets.Property)]
-    public class IndexedAttribute : System.Attribute
-    {
-        public IndexedAttribute()
-        {
-        }
+	[AttributeUsage(AttributeTargets.Property)]
+	public class AutoIncrementAttribute : Attribute
+	{
+	}
 
-        public IndexedAttribute(string name, int order)
-        {
-            this.Name = name;
-            this.Order = order;
-        }
+	[AttributeUsage(AttributeTargets.Property)]
+	public class IndexedAttribute : Attribute
+	{
+		public string Name { get; set; }
+		public int Order { get; set; }
+		public virtual bool Unique { get; set; }
 
-        public string Name { get; set; }
-        public int Order { get; set; }
-        public virtual bool Unique { get; set; }
-    }
+		public IndexedAttribute()
+		{
+		}
 
-    [AttributeUsage(AttributeTargets.Property)]
-    public class IgnoreAttribute : System.Attribute
-    {
-    }
+		public IndexedAttribute(string name, int order)
+		{
+			Name = name;
+			Order = order;
+		}
+	}
 
-    [AttributeUsage(AttributeTargets.Property)]
-    public class UniqueAttribute : IndexedAttribute
-    {
-        public override bool Unique => true;
-    }
+	[AttributeUsage(AttributeTargets.Property)]
+	public class IgnoreAttribute : Attribute
+	{
+	}
 
-    [AttributeUsage(AttributeTargets.Property)]
-    public class MaxLengthAttribute : System.Attribute
-    {
-        public MaxLengthAttribute(int length)
-        {
-            this.Value = length;
-        }
+	[AttributeUsage(AttributeTargets.Property)]
+	public class UniqueAttribute : IndexedAttribute
+	{
+		public override bool Unique
+		{
+			get { return true; }
+			set { /* throw?  */ }
+		}
+	}
 
-        public int Value { get; }
-    }
+	[AttributeUsage(AttributeTargets.Property)]
+	public class MaxLengthAttribute : Attribute
+	{
+		public int Value { get; private set; }
 
-    [AttributeUsage(AttributeTargets.Property)]
-    public class CollationAttribute : System.Attribute
-    {
-        public CollationAttribute(string collation)
-        {
-            this.Value = collation;
-        }
+		public MaxLengthAttribute(int length)
+		{
+			Value = length;
+		}
+	}
 
-        public string Value { get; }
-    }
+	public sealed class PreserveAttribute : System.Attribute
+	{
+		public bool AllMembers;
+		public bool Conditional;
+	}
 
-    [AttributeUsage(AttributeTargets.Property)]
-    public class NotNullAttribute : System.Attribute
-    {
-    }
+	/// <summary>
+	/// Select the collating sequence to use on a column.
+	/// "BINARY", "NOCASE", and "RTRIM" are supported.
+	/// "BINARY" is the default.
+	/// </summary>
+	[AttributeUsage(AttributeTargets.Property)]
+	public class CollationAttribute : Attribute
+	{
+		public string Value { get; private set; }
+
+		public CollationAttribute(string collation)
+		{
+			Value = collation;
+		}
+	}
+
+	[AttributeUsage(AttributeTargets.Property)]
+	public class NotNullAttribute : Attribute
+	{
+	}
+
+	[AttributeUsage(AttributeTargets.Enum)]
+	public class StoreAsTextAttribute : Attribute
+	{
+	}
+
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEditor.TestTools;
-using IgnoreAttribute = SQLite.Attribute.IgnoreAttribute;
+using IgnoreAttribute = SQLite.Attributes.IgnoreAttribute;
 using SqlCipher4Unity3D;
 using System.IO;
 

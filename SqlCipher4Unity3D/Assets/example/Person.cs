@@ -1,9 +1,9 @@
-﻿using SQLite.Attribute;
+﻿using SQLite.Attributes;
 using UnityEngine.Scripting;
 
 namespace example
 {
-    [Preserve]
+    [UnityEngine.Scripting.Preserve]
     public class Person
     {
         [PrimaryKey] [AutoIncrement] public int Id { get; set; }
