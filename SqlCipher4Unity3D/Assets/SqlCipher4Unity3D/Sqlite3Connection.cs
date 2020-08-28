@@ -2318,6 +2318,7 @@ namespace SqlCipher4Unity3D
 						.Where(x => x.AttributeType == typeof(TableAttribute))
 						.Select(x => (TableAttribute)Orm.InflateAttribute(x))
 						.FirstOrDefault();
+			//var tableAttr = (TableAttribute)type.GetCustomAttributes(typeof(TableAttribute), true).FirstOrDefault();
 
 			TableName = (tableAttr != null && !string.IsNullOrEmpty(tableAttr.Name)) ? tableAttr.Name : MappedType.Name;
 			WithoutRowId = tableAttr != null ? tableAttr.WithoutRowId : false;
@@ -2450,12 +2451,18 @@ namespace SqlCipher4Unity3D
 
 			public Column(PropertyInfo prop, CreateFlags createFlags = CreateFlags.None)
 			{
-				var colAttr = prop.CustomAttributes.FirstOrDefault(x => x.AttributeType == typeof(ColumnAttribute));
+				// NOTE(pyoung): ConstructorArguments - "IL2CPP does not support inspection of attribute constructor arguments at run time."
+
+				//var colAttr = prop.CustomAttributes.FirstOrDefault(x => x.AttributeType == typeof(ColumnAttribute));
+				//Name = (colAttr != null && colAttr.ConstructorArguments.Count > 0) ?
+				//		colAttr.ConstructorArguments[0].Value?.ToString() :
+				//		prop.Name;
 
 				_prop = prop;
-				Name = (colAttr != null && colAttr.ConstructorArguments.Count > 0) ?
-						colAttr.ConstructorArguments[0].Value?.ToString() :
-						prop.Name;
+
+				var colAttr = (ColumnAttribute)prop.GetCustomAttributes(typeof(ColumnAttribute), true).FirstOrDefault();
+				Name = colAttr == null ? prop.Name : colAttr.Name;
+
 				//If this type is Nullable<T> then Nullable.GetUnderlyingType returns the T, otherwise it returns null, so get the actual type instead
 				ColumnType = Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType;
 				Collation = Orm.Collation(prop);
@@ -2715,6 +2722,8 @@ namespace SqlCipher4Unity3D
 				p.CustomAttributes
 				 .Where(x => indexedInfo.IsAssignableFrom(x.AttributeType.GetTypeInfo()))
 				 .Select(x => (IndexedAttribute)InflateAttribute(x));
+			//var attrs = p.GetCustomAttributes(typeof(IndexedAttribute), true);
+			//return attrs.Cast<IndexedAttribute>();
 		}
 
 		public static int? MaxStringLength(PropertyInfo p)
@@ -2726,6 +2735,13 @@ namespace SqlCipher4Unity3D
 				return attrv.Value;
 			}
 			return null;
+
+			//var attrs = p.GetCustomAttributes(typeof(MaxLengthAttribute), true);
+			//if (attrs.Length > 0)
+            //{
+			//	return ((MaxLengthAttribute)attrs[0]).Value;
+			//}
+			//return null;
 		}
 
 		public static bool IsMarkedNotNull(MemberInfo p)
