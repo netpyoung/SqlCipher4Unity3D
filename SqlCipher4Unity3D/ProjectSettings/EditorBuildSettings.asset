@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/example/CreateDBFromScript.unity
-    guid: 7968c1be4dbbe3e48bf7da1746a93ac7
+    path: Assets/example.async/CreateDBScriptAsync.unity
+    guid: 1742b745bdd4b5847b73a7eac1d28e56
   m_configObjects: {}
