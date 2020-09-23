@@ -60,7 +60,7 @@ All you have to do to start using it in your project:
 ## UPM
 
 ``` json
-"com.netpyoung.sqlcipher4unity3d": "https://github.com/netpyoung/SqlCipher4Unity3D.git?path=SqlCipher4Unity3D/Assets/SqlCipher4Unity3D#1.1.0"
+"com.netpyoung.sqlcipher4unity3d": "https://github.com/netpyoung/SqlCipher4Unity3D.git?path=SqlCipher4Unity3D/Assets/SqlCipher4Unity3D#1.1.1"
 ```
 
 ## Contributer(❤️)
