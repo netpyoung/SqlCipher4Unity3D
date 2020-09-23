@@ -49,16 +49,17 @@ end
 
 desc 'library linux 64'
 task :lib_linux_64 do
-  puts 'NOTE(pyoung) building on Ubuntu 64bit - v4.3.0'
+  puts 'NOTE(pyoung) building on Ubuntu 64bit - v4.4.0'
   build_dir = 'build/linux_64'
   lib_dir = 'lib/linux_64'
 
-  sqlcipher_version = 'v4.3.0'
+  sqlcipher_version = 'v4.4.0'
 
   FileUtils.mkdir_p(build_dir) unless File.directory?(build_dir)
   FileUtils.mkdir_p(lib_dir) unless File.directory?(lib_dir)
 
   Dir.chdir(build_dir) do
+    sh 'sudo apt-get install build-essential -y'
     sh 'sudo apt-get install tcl -y'
     sh 'sudo apt-get install libssl-dev -y'
     sh 'git clone https://github.com/sqlcipher/sqlcipher.git'
@@ -130,7 +131,7 @@ task :lib_win_64 do
   build_dir = 'build/win_64'
   lib_dir = 'lib/win_64'
 
-  sqlcipher_version = 'v4.3.0'
+  sqlcipher_version = 'v4.4.0'
 
   FileUtils.mkdir_p(build_dir) unless File.directory?(build_dir)
   FileUtils.mkdir_p(lib_dir) unless File.directory?(lib_dir)
@@ -184,7 +185,7 @@ task :lib_win_32 do
   build_dir = 'build/win_32'
   lib_dir = 'lib/win_32'
 
-  sqlcipher_version = 'v4.3.0'
+  sqlcipher_version = 'v4.4.0'
 
   FileUtils.mkdir_p(build_dir) unless File.directory?(build_dir)
   FileUtils.mkdir_p(lib_dir) unless File.directory?(lib_dir)
@@ -230,7 +231,7 @@ task :lib_android do
   lib_dir = 'lib/android'
 
   # ref: https://www.zetetic.net/sqlcipher/sqlcipher-for-android/
-  sqlcipher_version = '4.3.0'
+  sqlcipher_version = '4.4.0'
   sqlite_version = '2.0.1'
   # annotation_version = '1.0.2'
   

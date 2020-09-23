@@ -16,16 +16,16 @@
 
 | Platforms |             | Support? | SQLCipherVersion                                                                          |
 |-----------|-------------|----------|-------------------------------------------------------------------------------------------|
-| Windows   | x86         | O        | v4.3.0                                                                                    |
-| Windows   | x86_64      | O        | v4.3.0                                                                                    |
-| Linux     | x86_64      | O        | v4.3.0                                                                                    |
-| macOS     | x86_64      | O        | [v4.3.0](https://github.com/jfcontart/SqlCipher4Unity3D_Apple)                            |
-| iOS       | 64bit       | O        | [v4.3.0](https://github.com/jfcontart/SqlCipher4Unity3D_Apple)                            |
-| tvOS      | 64bit       | O        | [v4.3.0](https://github.com/jfcontart/SqlCipher4Unity3D_Apple)                            |
-| Android   | armeabi-v7a | O        | [v4.4.0](https://mvnrepository.com/artifact/net.zetetic/android-database-sqlcipher/4.3.0) |
-| Android   | arm64_v8a   | O        | [v4.4.0](https://mvnrepository.com/artifact/net.zetetic/android-database-sqlcipher/4.3.0) |
-| Android   | x86         | O        | [v4.4.0](https://mvnrepository.com/artifact/net.zetetic/android-database-sqlcipher/4.3.0) |
-| Android   | x86_64      | O        | [v4.4.0](https://mvnrepository.com/artifact/net.zetetic/android-database-sqlcipher/4.3.0) |
+| Windows   | x86         | O        | v4.4.0                                                                                    |
+| Windows   | x86_64      | O        | v4.4.0                                                                                    |
+| Linux     | x86_64      | O        | v4.4.0                                                                                    |
+| macOS     | x86_64      | O        | [v4.4.0](https://github.com/jfcontart/SqlCipher4Unity3D_Apple)                            |
+| iOS       | 64bit       | O        | [v4.4.0](https://github.com/jfcontart/SqlCipher4Unity3D_Apple)                            |
+| tvOS      | 64bit       | O        | [v4.4.0](https://github.com/jfcontart/SqlCipher4Unity3D_Apple)                            |
+| Android   | armeabi-v7a | O        | [v4.4.0](https://mvnrepository.com/artifact/net.zetetic/android-database-sqlcipher/4.4.0) |
+| Android   | arm64_v8a   | O        | [v4.4.0](https://mvnrepository.com/artifact/net.zetetic/android-database-sqlcipher/4.4.0) |
+| Android   | x86         | O        | [v4.4.0](https://mvnrepository.com/artifact/net.zetetic/android-database-sqlcipher/4.4.0) |
+| Android   | x86_64      | O        | [v4.4.0](https://mvnrepository.com/artifact/net.zetetic/android-database-sqlcipher/4.4.0) |
 | Linux     | x86         | X        |                                                                                           |
 | WebGL     |             | X        |                                                                                           |
 
