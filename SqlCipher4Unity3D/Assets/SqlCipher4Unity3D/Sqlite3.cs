@@ -115,6 +115,8 @@ namespace SqlCipher4Unity3D
         private const string DLL_NAME = "sqlcipher";
 #elif UNITY_STANDALONE
         private const string DLL_NAME = "sqlcipher";
+#elif UNITY_WSA // define directive for Universal Windows Platform.
+		private const string DLL_NAME = "sqlcipher";
 #elif UNITY_ANDROID
 		private const string DLL_NAME = "sqlcipher";
 #elif UNITY_IOS

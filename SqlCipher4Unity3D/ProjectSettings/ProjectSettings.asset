@@ -744,11 +744,11 @@ PlayerSettings:
   m_MobileRenderingPath: 1
   metroPackageName: SqlCipher4Unity3D
   metroPackageVersion: 
-  metroCertificatePath: 
+  metroCertificatePath: C:\mySpace\_NF\SqlCipher4Unity3D\SqlCipher4Unity3D\Assets\WSATestCertificate.pfx
   metroCertificatePassword: 
-  metroCertificateSubject: 
-  metroCertificateIssuer: 
-  metroCertificateNotAfter: 0000000000000000
+  metroCertificateSubject: DefaultCompany
+  metroCertificateIssuer: DefaultCompany
+  metroCertificateNotAfter: 00b198b1fab7d701
   metroApplicationDescription: SqlCipher4Unity3D
   wsaImages: {}
   metroTileShortName: 
