@@ -2,32 +2,30 @@
 
 ## What's this?
 
- This project was insprited in [codecoding/SQLite4Unity3d](https://github.com/codecoding/SQLite4Unity3d).
+ I decided that there should be a simpler way and I created **SqlCipher4Unity3D**, a plugin that helps you to use [libsqlcipher](https://github.com/sqlcipher/sqlcipher/) in your Unity3d projects in a clear and easy way and works in **iOS, Android, OSX, Windows, Android** projects.
 
- When I started with Unity3d development I needed to use SQLite in my project and it was very hard to me to find a place with simple instructions on how to make it work. All I got were links to paid solutions on the Unity3d's Assets Store and a lot of different and complicated tutorials.
+- based on
+  - [codecoding/SQLite4Unity3d](https://github.com/codecoding/SQLite4Unity3d)
+  - [sqlite-net](https://github.com/praeclarum/sqlite-net)
 
- At the end, I decided that there should be a simpler way and I created **SqlCipher4Unity3D**, a plugin that helps you to use SqlCipher in your Unity3d projects in a clear and easy way.
+## prebuilt library
 
- It uses the great [sqlite-net](https://github.com/praeclarum/sqlite-net) library as a base so you will have **Linq besides sql**. For a further reference on what possibilities you have available with this library I encourage you to visit [its github repository](https://github.com/praeclarum/sqlite-net).
+- prebuilt library are maintained by [prebuilt-libsqlcipher](https://github.com/netpyoung/prebuilt-libsqlcipher)
+  - libsqlcipher v4.4.3
 
-- Note: _SQLite4Unity3d uses only the synchronous part of sqlite-net, so all the calls to the database are synchronous._
+## installation
 
-## Support Platforms
+## using .unitypackage
 
-| Platforms |             | Support? | SQLCipherVersion                                                                          |
-|-----------|-------------|----------|-------------------------------------------------------------------------------------------|
-| Windows   | x86         | O        | v4.4.0                                                                                    |
-| Windows   | x86_64      | O        | v4.4.0                                                                                    |
-| Linux     | x86_64      | O        | v4.4.0                                                                                    |
-| macOS     | x86_64      | O        | [v4.4.0](https://github.com/jfcontart/SqlCipher4Unity3D_Apple)                            |
-| iOS       | 64bit       | O        | [v4.4.0](https://github.com/jfcontart/SqlCipher4Unity3D_Apple)                            |
-| tvOS      | 64bit       | O        | [v4.4.0](https://github.com/jfcontart/SqlCipher4Unity3D_Apple)                            |
-| Android   | armeabi-v7a | O        | [v4.4.0](https://mvnrepository.com/artifact/net.zetetic/android-database-sqlcipher/4.4.0) |
-| Android   | arm64_v8a   | O        | [v4.4.0](https://mvnrepository.com/artifact/net.zetetic/android-database-sqlcipher/4.4.0) |
-| Android   | x86         | O        | [v4.4.0](https://mvnrepository.com/artifact/net.zetetic/android-database-sqlcipher/4.4.0) |
-| Android   | x86_64      | O        | [v4.4.0](https://mvnrepository.com/artifact/net.zetetic/android-database-sqlcipher/4.4.0) |
-| Linux     | x86         | X        |                                                                                           |
-| WebGL     |             | X        |                                                                                           |
+- [Download this .unitypackage from Release Page](https://github.com/netpyoung/SqlCipher4Unity3D/releases)
+
+## using UPM
+
+using #{version} for versioning.
+
+``` json
+"com.netpyoung.sqlcipher4unity3d": "https://github.com/netpyoung/SqlCipher4Unity3D.git?path=SqlCipher4Unity3D/Assets/SqlCipher4Unity3D#1.2.0"
+```
 
 ## Watchout
 
@@ -38,39 +36,23 @@
 
 From `1.1.0` I removed `v` prefix for support UPM.
 
-| SqlCipher4Unity3D tag | sqlcipher version                                                                                                |
-|-----------------------|------------------------------------------------------------------------------------------------------------------|
-| 1.1.x                 | 4.x.x                                                                                                           |
-| v1.0.x                | [3.x.x](https://github.com/netpyoung/SqlCipher4Unity3D/blob/2c642b3f0387dadfb4a145cb7236e99c9109fb94/README.md) |
+| SqlCipher4Unity3D tag | sqlcipher version                                                                                               |
+| --------------------- | --------------------------------------------------------------------------------------------------------------- |
+| 1.1.x ~               | 4.x.x                                                                                                           |
+| v1.0.x ~              | [3.x.x](https://github.com/netpyoung/SqlCipher4Unity3D/blob/2c642b3f0387dadfb4a145cb7236e99c9109fb94/README.md) |
 
-## The fast track
+## Example & Test
 
-All you have to do to start using it in your project:
-
-1. Download unitypackage, then extract its content on your Unity3D Project. It contains the dlls that Unity3d will need to access sqlite.
-   - [v1.0.2.unitypackage](https://github.com/netpyoung/SqlCipher4Unity3D/releases/download/v1.0.2/SqlCipher4Unity3D-v1.0.2.unitypackage) (for sqlcipher 3.x.x)
-   - [1.1.2.unitypackage](https://github.com/netpyoung/SqlCipher4Unity3D/releases/download/1.1.2/SqlCipher4Unity3D-1.1.2.unitypackage) (for sqlcipher 4.x.x)
-2. **You’re done!**
-
-## Examples & Tests
-
-- [./SqlCipher4Unity3D/Assets/example/](./SqlCipher4Unity3D/Assets/example/)
-- [./SqlCipher4Unity3D/Assets/test/](./SqlCipher4Unity3D/Assets/test/)
-
-## UPM
-
-``` json
-"com.netpyoung.sqlcipher4unity3d": "https://github.com/netpyoung/SqlCipher4Unity3D.git?path=SqlCipher4Unity3D/Assets/SqlCipher4Unity3D#1.1.2"
-```
+- [example](./SqlCipher4Unity3D/Assets/example/), [test](./SqlCipher4Unity3D/Assets/test/)
 
 ## Contributer(❤️)
 
-- [@jfcontart]
+- [@jfcontart](https://github.com/jfcontart)
 
 ## LICENCE
 
 | project                                                                                   | license                                                                 |
-|-------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
 | [netpyoung/SqlCipher4Unity3d](./)                                                         | [MIT](./LICENSE)                                                        |
 | [jfcontart/SqlCipher4Unity3D_Apple](https://github.com/jfcontart/SqlCipher4Unity3D_Apple) | [copyleft](https://github.com/jfcontart/SqlCipher4Unity3D_Apple)        |
 | [robertohuertasm/SQLite4Unity3d](https://github.com/robertohuertasm/SQLite4Unity3d)       | [MIT](https://github.com/codecoding/SQLite4Unity3d/blob/master/LICENSE) |
@@ -132,7 +114,3 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ```
-
-----------------
-
-[@jfcontart]: https://github.com/jfcontart
