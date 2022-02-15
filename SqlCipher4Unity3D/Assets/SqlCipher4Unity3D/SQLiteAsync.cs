@@ -21,6 +21,11 @@
 //
 
 using System;
+using System.Collections.Generic;
+using System.Threading;
+using SqlCipher4Unity3D;
+#if !SQLITEASYNC_UNITASK
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -1387,7 +1392,7 @@ namespace SqlCipher4Unity3D
             return WriteAsync(conn => _innerQuery.Delete());
         }
     }
-
+#endif
     class SQLiteConnectionPool
     {
         class Entry
@@ -1493,7 +1498,8 @@ namespace SqlCipher4Unity3D
         }
     }
 
-    /// <summary>
+
+/// <summary>
     /// This is a normal connection except it contains a Lock method that
     /// can be used to serialize access to the database
     /// in lieu of using the sqlite's FullMutex support.
@@ -1549,5 +1555,5 @@ namespace SqlCipher4Unity3D
             }
         }
     }
-}
+
 
