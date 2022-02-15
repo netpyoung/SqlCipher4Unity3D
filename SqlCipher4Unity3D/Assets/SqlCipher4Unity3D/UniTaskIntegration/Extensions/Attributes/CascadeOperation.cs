@@ -1,4 +1,4 @@
-namespace SqlCipher4Unity3D.SQLite.Attribute
+namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions.Attributes
 {
     using System;
 

@@ -1,10 +1,7 @@
-namespace Chance.Application.Infrastructure.Database_Tests
+namespace SqlCipher4Unity3D.UniTaskIntegration.Tests
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.IO;
-    using global::SqlCipher4Unity3D;
     using SqlCipher4Unity3D;
     using SQLite.Attributes;
     using UnityEngine;

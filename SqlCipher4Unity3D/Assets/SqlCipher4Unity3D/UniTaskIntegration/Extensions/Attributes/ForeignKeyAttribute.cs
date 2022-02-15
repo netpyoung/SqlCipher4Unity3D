@@ -1,8 +1,7 @@
-namespace SqlCipher4Unity3D.SQLite.Attribute
+namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions.Attributes
 {
     using System;
     using global::SQLite.Attributes;
-    using SqlCipher4Unity3D.SQLite.Attribute;
 
     [AttributeUsage(AttributeTargets.Property)]
     public class ForeignKeyAttribute : IndexedAttribute

@@ -2,7 +2,6 @@ namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions.Attributes
 {
     using System;
     using global::SQLite.Attributes;
-    using SQLite.Attribute;
 
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
     public abstract class RelationshipAttribute : IgnoreAttribute

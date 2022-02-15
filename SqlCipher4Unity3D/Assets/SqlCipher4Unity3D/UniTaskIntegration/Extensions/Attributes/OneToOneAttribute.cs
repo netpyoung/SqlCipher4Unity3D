@@ -1,7 +1,5 @@
-namespace SqlCipher4Unity3D.SQLite.Attribute
+namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions.Attributes
 {
-    using UniTaskIntegration.Extensions.Attributes;
-
     public class OneToOneAttribute : RelationshipAttribute
     {
         public OneToOneAttribute(string foreignKey = null, string inverseProperty = null) 

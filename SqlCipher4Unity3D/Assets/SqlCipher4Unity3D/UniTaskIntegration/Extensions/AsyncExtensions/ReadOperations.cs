@@ -1,24 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Threading;
-using System.Linq.Expressions;
-using SqlCipher4Unity3D.SQLite.Attribute;
 using SQLite.Attributes;
 
-
 [assembly: Preserve]
-namespace SqlCipher4Unity3D.AsyncExtensions
+namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions.AsyncExtensions
 {
-    
-    using Cysharp.Threading.Tasks;
-    using AsyncExtensions;
-    using Extensions;
-    using SQLite.Attribute;
-    using UniTaskIntegration.Extensions;
+	using System;
+	using System.Collections.Generic;
+	using System.Linq.Expressions;
+	using System.Reflection;
+	using System.Threading;
+	using Cysharp.Threading.Tasks;
+	using SQLite.Attributes;
+	using SQLiteAsyncConnection = SqlCipher4Unity3D.SQLiteAsyncConnection;
 
-
-    [Preserve]
+	[Preserve]
     public static class ReadOperations
     {
         #region Public API

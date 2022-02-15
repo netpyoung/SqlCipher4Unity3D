@@ -1,12 +1,7 @@
-using System;
-using System.Reflection;
-
-
-
-
-namespace SqlCipher4Unity3D.AsyncExtensions
+namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions.AsyncExtensions
 {
-    
+    using System;
+    using System.Reflection;
     using SqlCipher4Unity3D;
 
     public static class SqliteAsyncConnectionWrapper

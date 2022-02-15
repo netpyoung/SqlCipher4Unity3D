@@ -1,4 +1,4 @@
-namespace SqlCipher4Unity3D.Extensions.TextBlob
+namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions.TextBlob
 {
     using System;
 

@@ -1,13 +1,9 @@
-
-using System.Collections;
-using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
-
-namespace SqlCipher4Unity3D.AsyncExtensions
+namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions.AsyncExtensions
 {
-	
+	using System.Collections;
+	using System.Collections.Generic;
+	using Cysharp.Threading.Tasks;
 	using SqlCipher4Unity3D;
-	using Extensions;
 
 	public static class WriteOperations
     {

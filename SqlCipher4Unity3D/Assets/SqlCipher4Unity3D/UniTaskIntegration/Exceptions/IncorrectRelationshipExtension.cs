@@ -1,4 +1,4 @@
-namespace SqlCipher4Unity3D.Exceptions
+namespace SqlCipher4Unity3D.UniTaskIntegration.Exceptions
 {
     using System;
 

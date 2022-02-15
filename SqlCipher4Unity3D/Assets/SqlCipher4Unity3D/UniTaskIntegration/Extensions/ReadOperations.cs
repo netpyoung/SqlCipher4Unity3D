@@ -14,9 +14,7 @@ namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions
     using Attributes;
     using Exceptions;
     using SqlCipher4Unity3D;
-    using SqlCipher4Unity3D.Extensions;
-    using SqlCipher4Unity3D.Extensions.TextBlob;
-    using SQLite.Attribute;
+    using TextBlob;
 
     public static class ReadOperations
     {

@@ -1,13 +1,8 @@
-using System.Reflection;
-using SqlCipher4Unity3D.SQLite.Attribute;
-
-
-
-namespace SqlCipher4Unity3D.Extensions.TextBlob
+namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions.TextBlob
 {
+    using System.Reflection;
+    using Attributes;
     using Serializers;
-    using SQLite.Attribute;
-
 
     public static class TextBlobOperations
     {

@@ -1,7 +1,6 @@
-namespace SqlCipher4Unity3D.SQLite.Attribute
+namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions.Attributes
 {
     using System;
-    using UniTaskIntegration.Extensions.Attributes;
 
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
     public class TextBlobAttribute : RelationshipAttribute

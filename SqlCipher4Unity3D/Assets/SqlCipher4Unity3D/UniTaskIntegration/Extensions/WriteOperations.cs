@@ -1,19 +1,15 @@
-
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-
-namespace SqlCipher4Unity3D.Extensions
+namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions
 {
-    
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using Attributes;
     using Exceptions;
-    using global::SQLite.Attributes;
     using SqlCipher4Unity3D;
-    using SQLite.Attribute;
+    using SQLite.Attributes;
     using TextBlob;
-    using UniTaskIntegration.Extensions.Attributes;
 
     public static class WriteOperations
     {

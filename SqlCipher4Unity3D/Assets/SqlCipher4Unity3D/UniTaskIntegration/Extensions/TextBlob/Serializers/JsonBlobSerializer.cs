@@ -1,8 +1,7 @@
-namespace SqlCipher4Unity3D.Extensions.TextBlob.Serializers
+namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions.TextBlob.Serializers
 {
     using System;
     using Newtonsoft.Json;
-    using TextBlob;
 
     public class JsonBlobSerializer : ITextBlobSerializer
     {

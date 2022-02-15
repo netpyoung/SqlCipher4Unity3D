@@ -1,16 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using SqlCipher4Unity3D.SQLite.Attribute;
-
-namespace SqlCipher4Unity3D.Extensions
+namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions
 {
-    using global::SQLite.Attributes;
-    using UniTaskIntegration.Extensions.Attributes;
-
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using System.Reflection;
+    using Attributes;
+    using SQLite.Attributes;
 
     public enum EnclosedType
     {
