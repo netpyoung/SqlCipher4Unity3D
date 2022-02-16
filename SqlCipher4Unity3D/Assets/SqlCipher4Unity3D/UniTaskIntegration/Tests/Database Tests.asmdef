@@ -5,7 +5,8 @@
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "UniTask",
-        "SqlCipher4Unity3D"
+        "SqlCipher4Unity3D",
+        "UniTaskIntegration"
     ],
     "includePlatforms": [
         "Editor"

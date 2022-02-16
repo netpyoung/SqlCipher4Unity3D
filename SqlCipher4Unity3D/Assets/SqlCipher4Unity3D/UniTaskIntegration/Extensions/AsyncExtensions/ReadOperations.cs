@@ -10,7 +10,7 @@ namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions.AsyncExtensions
 	using System.Threading;
 	using Cysharp.Threading.Tasks;
 	using SQLite.Attributes;
-	using SQLiteAsyncConnection = SqlCipher4Unity3D.SQLiteAsyncConnection;
+
 
 	[Preserve]
     public static class ReadOperations
