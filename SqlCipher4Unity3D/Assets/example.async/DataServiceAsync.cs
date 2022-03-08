@@ -9,8 +9,10 @@ using System.IO;
 namespace example.async
 {
     using Cysharp.Threading.Tasks;
+    #if SQLITEASYNC_UNITASK
     using SqlCipher4Unity3D.UniTaskIntegration;
 
+    #endif
     public class DataServiceAsync
     {
         private readonly SQLiteAsyncConnection _connection;

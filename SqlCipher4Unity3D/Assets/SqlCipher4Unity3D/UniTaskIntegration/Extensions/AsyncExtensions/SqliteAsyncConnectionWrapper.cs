@@ -8,12 +8,12 @@ namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions.AsyncExtensions
     {
         private static readonly MethodInfo GetConnectionMethodInfo = typeof(SQLiteAsyncConnection).GetTypeInfo().GetDeclaredMethod("GetConnection");
 
-        static private SQLiteConnectionWithLock GetConnectionWithLock(SQLiteAsyncConnection asyncConnection)
+        private static SQLiteConnectionWithLock GetConnectionWithLock(SQLiteAsyncConnection asyncConnection)
         {
             return (SQLiteConnectionWithLock) GetConnectionMethodInfo.Invoke(asyncConnection, null);
         }
 
-        static public SQLiteConnectionWithLock Lock(SQLiteAsyncConnection asyncConnection)
+        public static SQLiteConnectionWithLock Lock(SQLiteAsyncConnection asyncConnection)
         {
             return GetConnectionWithLock(asyncConnection);
         }
@@ -21,7 +21,7 @@ namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions.AsyncExtensions
 
     public static class SqliteConnectionExtensions
     {
-        static public IDisposable Lock(this SQLiteConnectionWithLock connection)
+        public static IDisposable Lock(this SQLiteConnectionWithLock connection)
         {
             var lockMethod = connection.GetType().GetTypeInfo().GetDeclaredMethod("Lock");
             return (IDisposable)lockMethod.Invoke(connection, null);

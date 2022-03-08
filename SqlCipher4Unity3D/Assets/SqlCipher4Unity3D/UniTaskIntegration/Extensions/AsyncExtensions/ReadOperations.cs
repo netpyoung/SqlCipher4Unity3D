@@ -4,7 +4,7 @@ using SQLite.Attributes;
 namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions.AsyncExtensions
 {
 	using System;
-	using System.Collections.Generic;
+	using System.Collections.Generic;       
 	using System.Linq.Expressions;
 	using System.Reflection;
 	using System.Threading;
@@ -33,7 +33,7 @@ namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions.AsyncExtensions
         public static UniTask<List<T>> GetAllWithChildrenAsync<T>(this SQLiteAsyncConnection conn, Expression<Func<T, bool>> filter = null, bool recursive = false, CancellationToken cancellationToken = default(CancellationToken))
             where T : new()
         {
-            return UniTask.Run(() =>
+            return UniTask.RunOnThreadPool(() =>
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
@@ -61,7 +61,7 @@ namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions.AsyncExtensions
         public static UniTask<T> GetWithChildrenAsync<T>(this SQLiteAsyncConnection conn, object pk, bool recursive = false, CancellationToken cancellationToken = default(CancellationToken))
             where T : new()
         {
-            return UniTask.Run(() =>
+            return UniTask.RunOnThreadPool(() =>
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
@@ -91,7 +91,7 @@ namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions.AsyncExtensions
         public static UniTask<T> FindWithChildrenAsync<T>(this SQLiteAsyncConnection conn, object pk, bool recursive = false, CancellationToken cancellationToken = default(CancellationToken))
             where T : new()
         {
-            return UniTask.Run(() =>
+            return UniTask.RunOnThreadPool(() =>
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
@@ -116,7 +116,7 @@ namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions.AsyncExtensions
         /// <typeparam name="T">Entity type where the object should be fetched from</typeparam>
         public static UniTask GetChildrenAsync<T>(this SQLiteAsyncConnection conn, T element, bool recursive = false, CancellationToken cancellationToken = default(CancellationToken))
         {
-			return UniTask.Run(() =>
+			return UniTask.RunOnThreadPool(() =>
 			 {
 				 cancellationToken.ThrowIfCancellationRequested();
 
@@ -142,7 +142,7 @@ namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions.AsyncExtensions
         /// <typeparam name="T">Entity type where the object should be fetched from</typeparam>
         public static UniTask GetChildAsync<T>(this SQLiteAsyncConnection conn, T element, string relationshipProperty, bool recursive = false, CancellationToken cancellationToken = default(CancellationToken))
         {
-			return UniTask.Run(() =>
+			return UniTask.RunOnThreadPool(() =>
 			 {
 				 cancellationToken.ThrowIfCancellationRequested();
 
@@ -185,7 +185,7 @@ namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions.AsyncExtensions
         /// <typeparam name="T">Entity type where the object should be fetched from</typeparam>
         public static UniTask GetChildAsync<T>(this SQLiteAsyncConnection conn, T element, PropertyInfo relationshipProperty, bool recursive = false, CancellationToken cancellationToken = default(CancellationToken))
         {
-			return UniTask.Run(() =>
+			return UniTask.RunOnThreadPool(() =>
 			 {
 				 cancellationToken.ThrowIfCancellationRequested();
 

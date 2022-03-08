@@ -16,7 +16,7 @@ namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions.TextBlob
         public static ITextBlobSerializer GetTextSerializer()
         {
             // If not specified, use default JSON serializer
-            return _serializer ?? (_serializer = new JsonBlobSerializer());
+            return _serializer ??= new JsonBlobSerializer();
         }
 
         public static void GetTextBlobChild(object element, PropertyInfo relationshipProperty)

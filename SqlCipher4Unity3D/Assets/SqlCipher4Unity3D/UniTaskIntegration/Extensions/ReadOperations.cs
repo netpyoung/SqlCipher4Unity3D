@@ -295,7 +295,7 @@ namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions
                 {
                     if (keyValue != null)
                     {
-                        AddPrimaryKeyToDictionary<T>(keyValue, element, primaryKeys);
+                        AddPrimaryKeyToDictionary(keyValue, element, primaryKeys);
                     }
                 }
             }
@@ -388,7 +388,7 @@ namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions
 
                     if (value == null)
                     {
-                        AddPrimaryKeyToDictionary<T>(foreignKeyValue, element, primaryKeys);
+                        AddPrimaryKeyToDictionary(foreignKeyValue, element, primaryKeys);
                     }
 
                     else

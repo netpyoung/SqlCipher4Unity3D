@@ -22,7 +22,7 @@ namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions.AsyncExtensions
         /// <param name="element">Object to be updated. Must already have been inserted in the database</param>
         public static UniTask UpdateWithChildrenAsync(this SQLiteAsyncConnection conn, object element)
         {
-			return UniTask.Run(() =>
+			return UniTask.RunOnThreadPool(() =>
 			 {
 				 var connectionWithLock = SqliteAsyncConnectionWrapper.Lock(conn);
 				 using (connectionWithLock.Lock())
@@ -46,7 +46,7 @@ namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions.AsyncExtensions
         /// <param name="recursive">If set to <c>true</c> all the insert-cascade properties will be inserted</param>
         public static UniTask InsertWithChildrenAsync(this SQLiteAsyncConnection conn, object element, bool recursive = false)
         {
-			return UniTask.Run(() =>
+			return UniTask.RunOnThreadPool(() =>
 			 {
 				 var connectionWithLock = SqliteAsyncConnectionWrapper.Lock(conn);
 				 using (connectionWithLock.Lock())
@@ -70,7 +70,7 @@ namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions.AsyncExtensions
         /// <param name="recursive">If set to <c>true</c> all the insert-cascade properties will be inserted</param>
         public static UniTask InsertOrReplaceWithChildrenAsync(this SQLiteAsyncConnection conn, object element, bool recursive = false)
         {
-			return UniTask.Run(() =>
+			return UniTask.RunOnThreadPool(() =>
 			 {
 				 var connectionWithLock = SqliteAsyncConnectionWrapper.Lock(conn);
 				 using (connectionWithLock.Lock())
@@ -94,7 +94,7 @@ namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions.AsyncExtensions
         /// <param name="recursive">If set to <c>true</c> all the insert-cascade properties will be inserted</param>
         public static UniTask InsertAllWithChildrenAsync(this SQLiteAsyncConnection conn, IEnumerable elements, bool recursive = false)
         {
-			return UniTask.Run(() =>
+			return UniTask.RunOnThreadPool(() =>
 			 {
 				 var connectionWithLock = SqliteAsyncConnectionWrapper.Lock(conn);
 				 using (connectionWithLock.Lock())
@@ -118,7 +118,7 @@ namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions.AsyncExtensions
         /// <param name="recursive">If set to <c>true</c> all the insert-cascade properties will be inserted</param>
         public static UniTask InsertOrReplaceAllWithChildrenAsync(this SQLiteAsyncConnection conn, IEnumerable elements, bool recursive = false)
         {
-			return UniTask.Run(() =>
+			return UniTask.RunOnThreadPool(() =>
 			 {
 				 var connectionWithLock = SqliteAsyncConnectionWrapper.Lock(conn);
 				 using (connectionWithLock.Lock())
@@ -140,7 +140,7 @@ namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions.AsyncExtensions
         /// <param name="objects">Objects to be deleted from the database</param>
         public static UniTask DeleteAllAsync(this SQLiteAsyncConnection conn, IEnumerable objects, bool recursive = false)
         {
-			return UniTask.Run(() =>
+			return UniTask.RunOnThreadPool(() =>
 			 {
 				 var connectionWithLock = SqliteAsyncConnectionWrapper.Lock(conn);
 				 using (connectionWithLock.Lock())
@@ -162,7 +162,7 @@ namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions.AsyncExtensions
         /// <param name="element">Object to be deleted from the database</param>
         public static UniTask DeleteAsync(this SQLiteAsyncConnection conn, object element, bool recursive)
         {
-			return UniTask.Run(() =>
+			return UniTask.RunOnThreadPool(() =>
 			 {
 				 var connectionWithLock = SqliteAsyncConnectionWrapper.Lock(conn);
 				 using (connectionWithLock.Lock())
@@ -181,7 +181,7 @@ namespace SqlCipher4Unity3D.UniTaskIntegration.Extensions.AsyncExtensions
         /// <typeparam name="T">The Entity type, it should match de database entity type</typeparam>
         public static UniTask DeleteAllIdsAsync<T>(this SQLiteAsyncConnection conn, IEnumerable<object> primaryKeyValues)
         {
-			return UniTask.Run(() =>
+			return UniTask.RunOnThreadPool(() =>
 			 {
 				 var connectionWithLock = SqliteAsyncConnectionWrapper.Lock(conn);
 				 using (connectionWithLock.Lock())
