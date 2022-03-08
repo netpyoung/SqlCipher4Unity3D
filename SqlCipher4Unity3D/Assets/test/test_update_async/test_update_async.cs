@@ -9,6 +9,10 @@ using UnityEngine;
 
 namespace test.test_update_async
 {
+    #if SQLITEASYNC_UNITASK
+    using SqlCipher4Unity3D.UniTaskIntegration;
+    #endif
+
     [SQLite.Attributes.Preserve]
     public class player_profile
     {

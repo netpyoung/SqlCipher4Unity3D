@@ -8,6 +8,11 @@ using System.IO;
 #endif
 namespace example.async
 {
+    using Cysharp.Threading.Tasks;
+    #if SQLITEASYNC_UNITASK
+    using SqlCipher4Unity3D.UniTaskIntegration;
+
+    #endif
     public class DataServiceAsync
     {
         private readonly SQLiteAsyncConnection _connection;
@@ -69,7 +74,12 @@ namespace example.async
         }
         ~DataServiceAsync()
         {
+            #if SQLITEASYNC_UNITASK
+            _connection.CloseAsync();
+            #else
             _connection.CloseAsync().Wait();
+            #endif
+
         }
 
         public async Task CreateDB()
@@ -119,12 +129,20 @@ namespace example.async
         {
             return _connection.Table<Person>().Where(x => x.Name == "Roberto");
         }
+        
+        #if SQLITEASYNC_UNITASK
+        public UniTask<Person> GetJohnny()
+        {
+            return _connection.Table<Person>().Where(person => person.Name == "Johnny").FirstOrDefaultAsync();
+        }
 
+        #else
         public Task<Person> GetJohnny()
         {
             return _connection.Table<Person>().Where(x => x.Name == "Johnny").FirstOrDefaultAsync();
         }
 
+        #endif
         public async Task<Person> CreatePerson()
         {
             Person p = new Person

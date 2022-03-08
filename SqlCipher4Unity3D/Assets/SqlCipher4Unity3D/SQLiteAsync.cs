@@ -33,6 +33,9 @@ namespace SqlCipher4Unity3D
     /// <summary>
     /// A pooled asynchronous connection to a SQLite database.
     /// </summary>
+    #if !SQLITEASYNC_UNITASK
+    
+   
     public partial class SQLiteAsyncConnection
     {
         readonly SQLiteConnectionString _connectionString;
@@ -1492,7 +1495,7 @@ namespace SqlCipher4Unity3D
             }
         }
     }
-
+    #endif
     /// <summary>
     /// This is a normal connection except it contains a Lock method that
     /// can be used to serialize access to the database
