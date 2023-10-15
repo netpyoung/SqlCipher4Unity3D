@@ -11,7 +11,9 @@
 ## prebuilt library
 
 - prebuilt library are maintained by [prebuilt-libsqlcipher](https://github.com/netpyoung/prebuilt-libsqlcipher)
-  - libsqlcipher v4.5.0
+  - libsqlcipher v4.5.5
+  - libsqlcipher v4.5.4 (android)
+  - libsqlcipher v4.5.0 (windows x86)
 
 ## installation
 
