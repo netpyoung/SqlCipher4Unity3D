@@ -11,8 +11,7 @@
 ## prebuilt library
 
 - prebuilt library are maintained by [prebuilt-libsqlcipher](https://github.com/netpyoung/prebuilt-libsqlcipher)
-  - libsqlcipher v4.5.5
-  - libsqlcipher v4.5.4 (android)
+  - libsqlcipher v4.10.0
   - libsqlcipher v4.5.0 (windows x86)
 
 ## installation
@@ -26,7 +25,7 @@
 using #{version} for versioning.
 
 ``` json
-"com.netpyoung.sqlcipher4unity3d": "https://github.com/netpyoung/SqlCipher4Unity3D.git?path=SqlCipher4Unity3D/Assets/SqlCipher4Unity3D#1.3.0"
+"com.netpyoung.sqlcipher4unity3d": "https://github.com/netpyoung/SqlCipher4Unity3D.git?path=SqlCipher4Unity3D/Assets/SqlCipher4Unity3D#1.3.2"
 ```
 
 ## Watchout
