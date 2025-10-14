@@ -338,6 +338,7 @@ namespace unity.libcipher
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int sqlite3_column_count(sqlite3_stmt* pStmt);
 
+
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
         public static extern sbyte* sqlite3_column_name(sqlite3_stmt* param0, int N);
@@ -345,6 +346,11 @@ namespace unity.libcipher
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const void *")]
         public static extern void* sqlite3_column_name16(sqlite3_stmt* param0, int N);
+
+#if false
+        // #52: https://github.com/netpyoung/SqlCipher4Unity3D/issues/52
+        // https://sqlite.org/c3ref/column_database_name.html
+        // https://sqlite.org/compile.html - SQLITE_ENABLE_COLUMN_METADATA
 
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
@@ -369,6 +375,7 @@ namespace unity.libcipher
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const void *")]
         public static extern void* sqlite3_column_origin_name16(sqlite3_stmt* param0, int param1);
+#endif // false
 
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("const char *")]
@@ -614,6 +621,10 @@ namespace unity.libcipher
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int sqlite3_sleep(int param0);
 
+#if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN || UNITY_WSA
+        // #52: https://github.com/netpyoung/SqlCipher4Unity3D/issues/52
+        // Windows Only
+
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int sqlite3_win32_set_directory([NativeTypeName("unsigned long")] UIntPtr type, void* zValue);
 
@@ -622,6 +633,7 @@ namespace unity.libcipher
 
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int sqlite3_win32_set_directory16([NativeTypeName("unsigned long")] UIntPtr type, [NativeTypeName("const void *")] void* zValue);
+#endif // UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN || UNITY_WSA
 
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int sqlite3_get_autocommit(sqlite3* param0);
@@ -753,11 +765,16 @@ namespace unity.libcipher
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void sqlite3_mutex_leave(sqlite3_mutex* param0);
 
+#if false
+        // #52: https://github.com/netpyoung/SqlCipher4Unity3D/issues/52
+        // https://www.sqlite.org/c3ref/mutex_held.html
+
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int sqlite3_mutex_held(sqlite3_mutex* param0);
 
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int sqlite3_mutex_notheld(sqlite3_mutex* param0);
+#endif // false
 
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern sqlite3_mutex* sqlite3_db_mutex(sqlite3* param0);
@@ -839,8 +856,13 @@ namespace unity.libcipher
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int sqlite3_backup_pagecount(sqlite3_backup* p);
 
+#if false
+        // #52: https://github.com/netpyoung/SqlCipher4Unity3D/issues/52
+        // https://sqlite.org/c3ref/unlock_notify.html
+
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int sqlite3_unlock_notify(sqlite3* pBlocked, [NativeTypeName("void (*)(void **, int)")] IntPtr xNotify, void* pNotifyArg);
+#endif // false
 
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int sqlite3_stricmp([NativeTypeName("const char *")] sbyte* param0, [NativeTypeName("const char *")] sbyte* param1);
@@ -897,6 +919,10 @@ namespace unity.libcipher
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int sqlite3_vtab_rhs_value(sqlite3_index_info* param0, int param1, sqlite3_value** ppVal);
 
+#if false
+        // #52: https://github.com/netpyoung/SqlCipher4Unity3D/issues/52
+        // --enable-stmt-scanstatus
+
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int sqlite3_stmt_scanstatus(sqlite3_stmt* pStmt, int idx, int iScanStatusOp, void* pOut);
 
@@ -905,6 +931,7 @@ namespace unity.libcipher
 
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void sqlite3_stmt_scanstatus_reset(sqlite3_stmt* param0);
+#endif // false
 
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int sqlite3_db_cacheflush(sqlite3* param0);
@@ -912,6 +939,9 @@ namespace unity.libcipher
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int sqlite3_system_errno(sqlite3* param0);
 
+#if false
+        // #52: https://github.com/netpyoung/SqlCipher4Unity3D/issues/52
+        // https://sqlite.org/compile.html - SQLITE_ENABLE_SNAPSHOT
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int sqlite3_snapshot_get(sqlite3* db, [NativeTypeName("const char *")] sbyte* zSchema, sqlite3_snapshot** ppSnapshot);
 
@@ -926,6 +956,7 @@ namespace unity.libcipher
 
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int sqlite3_snapshot_recover(sqlite3* db, [NativeTypeName("const char *")] sbyte* zDb);
+#endif // false
 
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("unsigned char *")]
@@ -934,12 +965,18 @@ namespace unity.libcipher
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int sqlite3_deserialize(sqlite3* db, [NativeTypeName("const char *")] sbyte* zSchema, [NativeTypeName("unsigned char *")] byte* pData, [NativeTypeName("sqlite3_int64")] long szDb, [NativeTypeName("sqlite3_int64")] long szBuf, [NativeTypeName("unsigned int")] uint mFlags);
 
+#if false
+        // #52: https://github.com/netpyoung/SqlCipher4Unity3D/issues/52
+        //--enable-rtree
+        // https://sqlite.org/compile.html - SQLITE_ENABLE_RTREE
+
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int sqlite3_rtree_geometry_callback(sqlite3* db, [NativeTypeName("const char *")] sbyte* zGeom, [NativeTypeName("int (*)(sqlite3_rtree_geometry *, int, sqlite3_rtree_dbl *, int *)")] IntPtr xGeom, void* pContext);
 
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int sqlite3_rtree_query_callback(sqlite3* db, [NativeTypeName("const char *")] sbyte* zQueryFunc, [NativeTypeName("int (*)(sqlite3_rtree_query_info *)")] IntPtr xQueryFunc, void* pContext, [NativeTypeName("void (*)(void *)")] IntPtr xDestructor);
-
+#endif // false
+ 
         [NativeTypeName("#define SQLITE_VERSION \"3.42.0\"")]
         public static ReadOnlySpan<byte> SQLITE_VERSION => new byte[] { 0x33, 0x2E, 0x34, 0x32, 0x2E, 0x30, 0x00 };
 
