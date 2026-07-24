@@ -16,6 +16,10 @@
 
 ## installation
 
+## pre-requisites
+
+You must have [EDM](https://github.com/eightpixelssquare/com.google.external-dependency-manager) in your project to resolve the required dependencies on android. This is only required if you're shipping on Android devices.
+
 ## using .unitypackage
 
 - [Download this .unitypackage from Release Page](https://github.com/netpyoung/SqlCipher4Unity3D/releases)

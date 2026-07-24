@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dependencies>
+  <androidPackages>
+    <androidPackage spec="net.zetetic:sqlcipher-android:4.10.0" />
+    <androidPackage spec="androidx.sqlite:sqlite:2.2.0" />
+  </androidPackages>
+</dependencies>
